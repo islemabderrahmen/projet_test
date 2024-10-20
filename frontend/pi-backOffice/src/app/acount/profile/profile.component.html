@@ -1,0 +1,144 @@
+<body class="g-sidenav-show bg-gray-200 align-items-center">
+  <div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+      <div class="col-12">
+        <app-navbar-index></app-navbar-index>
+      </div>
+    </div>
+  </div>
+  <br /><br /><br /><br />
+  <div class="main-content">
+    <div class="container-fluid px-2 px-md-9">
+      <div
+        class="page-header min-height-300 border-radius-xl mt-4 position-relative"
+        style=" background-image: url('../assets/imgB/fe.png');"
+      >
+        <span class="mask bg-gradient-primary opacity-6"></span>
+        <h1
+          class="text-white animated-text position-absolute top-50 start-50 translate-middle"
+        >
+          {{"Bienvenue" | translate}} {{ userData.username }}
+        </h1>
+      </div>
+
+      <div class="card card-body mx-3 mx-md-8 mt-n6">
+        <div class="row gx-4 mb-2">
+          <div class="col-auto position-relative">
+            <div class="avatar avatar-xl">
+              <img
+                [src]="userImage"
+                alt="profile_image"
+                class="w-100 border-radius-lg shadow-sm"
+              />
+              <div
+                class="position-absolute bottom-0 end-0 p-1 bg-dark rounded-circle"
+                style="width: 30px; height: 30px; cursor: pointer"
+                (click)="openDialog()"
+              >
+                <i class="material-icons text-white" style="font-size: 23px"
+                  >edit</i
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-auto my-auto">
+            <div class="h-100">
+              <h5 class="mb-1">{{ userData.username }}</h5>
+              <p class="mb-0 font-weight-normal text-sm">
+                {{ userData.firstName }} {{ userData.lastName }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row">
+            <div class="col-12 col-xl-4">
+              <div class="card card-plain h-100">
+                <div class="card-body p-3">
+                  <ul class="list-group">
+                    <li class="list-group-item border-0 ps-0 text-sm">
+                      <strong class="text-dark">{{"Email" | translate}}:</strong>
+                      {{ userData.email }}
+                    </li>
+                    <li
+                      class="list-group-item border-0 ps-0 text-sm"
+                      *ngIf="userData.identity"
+                    >
+                      <strong class="text-dark">{{"Identity" | translate}}:</strong>
+                      {{ userData.identity }}
+                    </li>
+                    <li
+                      class="list-group-item border-0 ps-0 text-sm"
+                      *ngIf="userData.representative"
+                    >
+                      <strong class="text-dark">{{"Representative :" | translate}}</strong>
+                      {{ userData.representative }}
+                    </li>
+                    <li
+                      class="list-group-item border-0 ps-0 text-sm"
+                      *ngIf="userData.sector"
+                    >
+                      <strong class="text-dark">{{"Sector" | translate}}:</strong>
+                      {{ userData.sector }}
+                    </li>
+                    <li
+                      class="list-group-item border-0 ps-0 text-sm"
+                      *ngIf="userData.adresse"
+                    >
+                      <strong class="text-dark">{{"Adresse" | translate}}:</strong>
+                      {{ userData.adresse }}
+                    </li>
+                    <li
+                      class="list-group-item border-0 ps-0 text-sm"
+                      *ngIf="userData.matricule"
+                    >
+                      <strong class="text-dark">{{"Matricule" | translate}}:</strong>
+                      {{ userData.matricule }}
+                    </li>
+                    <li
+                      class="list-group-item border-0 ps-0 text-sm"
+                      *ngIf="userData.description"
+                    >
+                      <strong class="text-dark">{{"Plus dinforamtions :" | translate}}</strong>
+                      {{ userData.description }}
+                    </li>
+                    <li
+                      *ngIf="userData.portfolio || userData.linkedin"
+                      class="list-group-item border-0 ps-0 pb-0"
+                    >
+                      <strong class="text-dark text-sm"
+                        >{{"Réseaux sociaux" | translate}}:</strong
+                      >
+                      <a
+                        *ngIf="userData.portfolio"
+                        class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0"
+                        href="{{ userData.portfolio }}"
+                        target="_blank"
+                      >
+                        <i class="fa fa-globe fa-lg"></i>
+                      </a>
+                      <a
+                        *ngIf="userData.linkedin"
+                        class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0"
+                        href="{{ userData.linkedin }}"
+                        target="_blank"
+                      >
+                        <i class="fab fa-linkedin fa-lg"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-footer-index></app-footer-index>
+    <app-image-popup
+      [image]="userImage"
+      (confirm)="onConfirm($event)"
+    ></app-image-popup>
+  </div>
+</body>

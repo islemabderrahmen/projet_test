@@ -1,0 +1,36 @@
+.favorite-icon {
+    color: #000; /* default color */
+    transition: color 0.3s ease !important; /* smooth transition for color change */
+  }
+  
+  .favorite-icon:hover {
+    color: #ff0000 !important; /* change to desired color on hover */
+  }
+  .b{
+    border: 1px solid black;
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  
+  .pagination button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 0 5px;
+    color: #007bff; /* Change to your desired color */
+    transition: color 0.3s ease;
+  }
+  
+  .pagination button:hover {
+    color: #0056b3; /* Change to your desired hover color */
+  }
+  
+  .pagination span {
+    margin: 0 10px;
+  }

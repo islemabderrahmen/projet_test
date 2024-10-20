@@ -1,0 +1,22 @@
+<div class="d-flex align-items-center justify-content-center vh-100">
+  <div class="text-center">
+    <h1 class="display-1 fw-bold">Error</h1>
+    <p class="fs-3">
+      <span class="text-danger">Opps!</span> This email isn't verified yet
+    </p>
+    <p class="lead">Send another verification request or check your email</p>
+
+    <button
+      class="btn bg-gradient-info mb-0 toast-btn"
+      data-target="infoToast"
+      (click)="emailVerification()"
+    >
+      Send
+    </button>
+    <br />
+    <br />
+    <a routerLink="/signIn" class="btn bg-gradient-danger mb-0 toast-btn"
+      >Back to SignIn</a
+    >
+  </div>
+</div>

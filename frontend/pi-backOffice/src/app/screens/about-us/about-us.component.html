@@ -1,0 +1,414 @@
+<body class="about-us bg-gray-200">
+  <div class="container position-sticky z-index-sticky top-0">
+    <app-navbar-index></app-navbar-index>
+  </div>
+  <header class="bg-gradient-dark">
+    <div
+      class="page-header min-vh-90"
+      style="background-image: url('../assets/imgB/forumab.jpg')"
+    >
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center mx-auto my-auto">
+            <br /><br />
+            <h1 class="text-white">
+              {{
+                "Explorez les opportunités passionnantes lors de nos forums universitaires"
+                  | translate
+              }}
+            </h1>
+            <p class="lead mb-4 text-white opacity-8">
+              {{
+                "Connectez-vous avec les meilleures entreprises et découvrez des offres d'emploi, des stages et bien plus encore lors de nos forums universitaires. Rejoignez-nous pour façonner votre carrière future !"
+                  | translate
+              }}
+            </p>
+            <button routerLink="/signIn" class="btn bg-white text-dark">
+              {{ "Créer un compte" | translate }}
+            </button>
+            <h6 class="text-white mb-2 mt-5">
+              {{ "Trouvez-nous sur" | translate }}
+            </h6>
+            <div class="d-flex justify-content-center">
+              <a href="javascript:;"
+                ><i class="fab fa-facebook text-lg text-white me-4"></i
+              ></a>
+              <a href="javascript:;"
+                ><i class="fab fa-instagram text-lg text-white me-4"></i
+              ></a>
+              <a href="javascript:;"
+                ><i class="fab fa-twitter text-lg text-white me-4"></i
+              ></a>
+              <a href="javascript:;"
+                ><i class="fab fa-google-plus text-lg text-white"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
+    <section class="py-7">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="row justify-content-start">
+              <div class="col-md-6">
+                <div class="info">
+                  <i
+                    class="material-icons text-3xl text-gradient text-info mb-3"
+                    >public</i
+                  >
+                  <h5>{{ "Collaborez avec Nous" | translate }}</h5>
+                  <p>
+                    {{
+                      "Rejoignez-nous dans notre mission de fournir des opportunités complètes aux entreprises et aux étudiants. Ensemble, nous pouvons faire la différence."
+                        | translate
+                    }}
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info">
+                  <i
+                    class="material-icons text-3xl text-gradient text-info mb-3"
+                    >payments</i
+                  >
+                  <h5>{{ "Sponsorisez Votre Entreprise" | translate }}</h5>
+                  <p>
+                    {{
+                      "Sponsorisez votre entreprise via notre plateforme et accédez à un large public de collaborateurs potentiels et de talents."
+                        | translate
+                    }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-start mt-4">
+              <div class="col-md-6">
+                <div class="info">
+                  <i
+                    class="material-icons text-3xl text-gradient text-info mb-3"
+                    >apps</i
+                  >
+                  <h5>{{ "Rejoignez Nos Forums" | translate }}</h5>
+                  <p>
+                    {{
+                      "Participez à nos forums pour explorer une variété d'opportunités, des offres d'emploi aux stages et au-delà."
+                        | translate
+                    }}
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info">
+                  <i
+                    class="material-icons text-3xl text-gradient text-info mb-3"
+                    >3p</i
+                  >
+                  <h5>{{ "Connectez-vous avec les Étudiants" | translate }}</h5>
+                  <p>
+                    {{
+                      "Engagez-vous avec notre communauté étudiante diversifiée et découvrez de nouvelles perspectives et des idées innovantes."
+                        | translate
+                    }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 ms-auto mt-lg-0 mt-4">
+            <div class="card">
+              <div
+                class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
+              >
+                <a class="d-block blur-shadow-image">
+                  <img
+                    src="../assets/imgB/hi.jpeg"
+                    alt="img-colored-shadow"
+                    class="img-fluid border-radius-lg"
+                  />
+                </a>
+              </div>
+              <div class="card-body text-center">
+                <h5 class="font-weight-normal">
+                  <a routerLink="/contact">{{
+                    "Contactez-nous pour Plus d'Informations" | translate
+                  }}</a>
+                </h5>
+                <p class="mb-0">
+                  {{
+                    "Vous souhaitez en savoir plus sur nos offres de stages, nos forums, nos collaborations et bien plus encore ? N'hésitez pas à nous contacter pour obtenir des informations détaillées et personnalisées. Notre équipe se fera un plaisir de répondre à toutes vos questions et de vous accompagner dans vos démarches."
+                      | translate
+                  }}
+                </p>
+                <button
+                  routerLink="/contact"
+                  class="btn bg-gradient-primary btn-sm mb-0 mt-3"
+                >
+                  {{ "En savoir plus" | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="pb-5 position-relative bg-gradient-dark mx-n3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 text-start mb-5 mt-5">
+            <h3 class="text-white z-index-1 position-relative">
+              {{ "L'équipe de direction" | translate }}
+            </h3>
+            <p class="text-white opacity-8 mb-0">
+              {{
+                "Rien que je voulais faire dans la vie sans y exceller. C'est mon talent."
+                  | translate
+              }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <div class="card card-profile mt-4">
+              <div class="row">
+                <div class="col-lg-4 col-md-6 col-12 mt-n5">
+                  <a href="javascript:;">
+                    <div class="p-3 pe-md-0 square-container">
+                      <img
+                          class="w-100 h-100 object-fit-cover border-radius-md shadow-lg"
+                        src="../assets/img/our-photos/helmi.jpg"
+                        alt="image"
+                      />
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-8 col-md-6 col-12 my-auto">
+                  <div class="card-body ps-lg-0">
+                    <h5 class="mb-0">Helmi Ben Romdhane</h5>
+                    <h6 class="text-info">{{ "Étudiant" | translate }}</h6>
+                    <p class="mb-0">
+                      {{ "Étudiant" | translate }}
+                      {{
+                        " travaillant sur un projet universitaire de cycle d'ingénierie en génie logiciel"
+                          | translate
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="card card-profile mt-lg-4 mt-5">
+              <div class="row">
+                <div class="col-lg-4 col-md-6 col-12 mt-n5">
+                  <a href="javascript:;">
+                    <div class="p-3 pe-md-0 square-container">
+                      <img
+                          class="w-100 h-100 object-fit-cover border-radius-md shadow-lg"
+                        src="../assets/img/our-photos/fatma.jpeg"
+                        alt="image"
+                      />
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-8 col-md-6 col-12 my-auto">
+                  <div class="card-body ps-lg-0">
+                    <h5 class="mb-0">Fatma Jrad</h5>
+                    <h6 class="text-info">{{ "Étudiante" | translate }}</h6>
+                    <p class="mb-0">
+                      {{ "Étudiante" | translate }}
+                      {{
+                        " travaillant sur un projet universitaire de cycle d'ingénierie en génie logiciel"
+                          | translate
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-6 col-12">
+            <div class="card card-profile mt-4 z-index-2">
+              <div class="row">
+                <div class="col-lg-4 col-md-6 col-12 mt-n5">
+                  <a href="javascript:;">
+                    <div class="p-3 pe-md-0 square-container">
+                      <img
+                          class="w-100 h-100 object-fit-cover border-radius-md shadow-lg"
+                        src="../assets/img/our-photos/ryhem.jpg"
+                        alt="image"
+                      />
+                    </div>
+                  </a>
+                </div>
+                <div class="col-lg-8 col-md-6 col-12 my-auto">
+                  <div class="card-body ps-lg-0">
+                    <h5 class="mb-0">Ryhem Allouchi</h5>
+                    <h6 class="text-info">{{ "Étudiante" | translate }}</h6>
+                    <p class="mb-0">
+                      {{ "Étudiante" | translate }}
+                      {{
+                        " travaillant sur un projet universitaire de cycle d'ingénierie en génie logiciel"
+                          | translate
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="card card-profile mt-lg-4 mt-5 z-index-2">
+              <div class="row">
+                <div class="col-lg-4 col-md-6 col-12 mt-n5">
+                  <a href="javascript:;">
+                    <div class="p-3 pe-md-0 square-container">
+                      <img
+                          class="w-100 h-100 object-fit-cover border-radius-md shadow-lg"
+                          src="../assets/img/our-photos/hadil.jpeg"
+                          alt="image"
+                      />
+                  </div>                  
+                  </a>
+                </div>
+                <div class="col-lg-8 col-md-6 col-12 my-auto">
+                  <div class="card-body ps-lg-0">
+                    <h5 class="mb-0">Hadil Dghaies</h5>
+                    <h6 class="text-info">{{ "Étudiante" | translate }}</h6>
+                    <p class="mb-0">
+                      {{ "Étudiante" | translate }}
+                      {{
+                        " travaillant sur un projet universitaire de cycle d'ingénierie en génie logiciel"
+                          | translate
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-lg-6 col-12">
+              <div class="card card-profile mt-lg-4 mt-5 z-index-2">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-12 mt-n5">
+                    <a href="javascript:;">
+                      <div class="p-3 pe-md-0 square-container">
+                        <img
+                            class="w-100 h-100 object-fit-cover border-radius-md shadow-lg"
+                          src="../assets/img/our-photos/salma.jpg"
+                          alt="image"
+                        />
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-lg-8 col-md-6 col-12 my-auto">
+                    <div class="card-body ps-lg-0">
+                      <h5 class="mb-0">Salma Beddakhlia</h5>
+                      <h6 class="text-info">{{ "Étudiante" | translate }}</h6>
+                      <p class="mb-0">
+                        {{ "Étudiante" | translate }}
+                        {{
+                          " travaillant sur un projet universitaire de cycle d'ingénierie en génie logiciel"
+                            | translate
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-12">
+              <div class="card card-profile mt-lg-4 mt-5 z-index-2">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-12 mt-n5">
+                    <a href="javascript:;">
+                      <div class="p-3 pe-md-0 square-container">
+                        <img
+                            class="w-100 h-100 object-fit-cover border-radius-md shadow-lg"
+                          src="../assets/img/our-photos/wale.jpeg"
+                          alt="image"
+                        />
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-lg-8 col-md-6 col-12 my-auto">
+                    <div class="card-body ps-lg-0">
+                      <h5 class="mb-0">Wale Hamdi</h5>
+                      <h6 class="text-info">{{ "Étudiant" | translate }}</h6>
+                      <p class="mb-0">
+                        {{ "Étudiant" | translate }}
+                        {{
+                          " travaillant sur un projet universitaire de cycle d'ingénierie en génie logiciel"
+                            | translate
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4 justify-content-center">
+            <div class="col-lg-6 col-12">
+              <div class="card card-profile mt-lg-4 mt-5 z-index-2">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-12 mt-n5">
+                    <a href="javascript:;">
+                      <div class="p-3 pe-md-0 square-container">
+                        <img
+                            class="w-100 h-100 object-fit-cover border-radius-md shadow-lg"
+                          src="../assets/img/our-photos/amine.jpg"
+                          alt="image"
+                        />
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-lg-8 col-md-6 col-12 my-auto">
+                    <div class="card-body ps-lg-0">
+                      <h5 class="mb-0">Amine Souissi</h5>
+                      <h6 class="text-info">{{ "Étudiant" | translate }}</h6>
+                      <p class="mb-0">
+                        {{ "Étudiant" | translate }}
+                        {{
+                          " travaillant sur un projet universitaire de cycle d'ingénierie en génie logiciel"
+                            | translate
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <app-footer-index></app-footer-index>
+  <script
+    src="../assets/jsB/core/popper.min.js"
+    type="text/javascript"
+  ></script>
+  <script
+    src="../assets/jsB/core/bootstrap.min.js"
+    type="text/javascript"
+  ></script>
+  <script src="../assets/jsB/plugins/perfect-scrollbar.min.js"></script>
+  <!--  Plugin for TypedJS, full documentation here: https://github.com/inorganik/CountUp.js -->
+  <script src="../assets/jsB/plugins/countup.min.js"></script>
+  <!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+  <script
+    src="../assets/jsB/material-kit.min.js?v=3.0.4"
+    type="text/javascript"
+  ></script>
+</body>

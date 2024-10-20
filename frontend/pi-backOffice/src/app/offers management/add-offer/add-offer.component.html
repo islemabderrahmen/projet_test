@@ -1,0 +1,152 @@
+<body class="g-sidenav-show bg-gray-200">
+  <div class="row">
+    <div class="col-3">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-9">
+      <app-navbar></app-navbar>
+      <div class="main-content">
+        <div class="container-fluid px-2 px-md-4">
+          <div class="page-header min-height-300 border-radius-xl mt-4"
+            style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+            <span class="mask bg-gradient-primary opacity-6"></span>
+          </div>
+          <div class="card card-body mx-3 mx-md-4 mt-n6">
+            <div class="row">
+              <div class="col-lg-8">
+                <button class="btn btn-lg bg-gradient-primary " (click)="toggleFileUpload()">ajouter une affiche</button>
+
+                <!-- Form for offer details -->
+                <ng-container *ngIf="!showFileUpload">
+                  <form role="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <!-- Offer details fields -->
+                    <div class="input-group input-group-outline mb-3">
+                      <label for="offerName" class="col-sm-4 col-form-label">Nom Offre :</label>
+                      <input type="text" class="form-control" formControlName="offerName" placeholder="Nom de l'offre">
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                        <label for="category" class="col-sm-4 col-form-label">Catégorie :</label>
+                        <select class="form-control" id="category" formControlName="offreCategory" >
+                            <option value="" disabled selected>Veuillez choisir une catégorie</option>
+                          <option *ngFor="let category of categoryOptions" [value]="category">{{ category }}</option>
+                        </select>
+                        <div class="text-danger mb-3" *ngIf="registerForm.controls['offreCategory'].errors && registerForm.get('offreCategory')?.touched">
+                          <div class="text-danger mb-3" *ngIf="registerForm.controls['offreCategory'].hasError('required')">ce champ est obligatoire</div>
+                        </div>
+                      </div>
+
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="col-sm-4 col-form-label" >Profil candidat :</label>
+                      <input type="text" class="form-control" formControlName="candidatProfil" placeholder="le profil souhaité" (change)="predict()">
+                    </div>
+                    <div class="text-danger mb-3" *ngIf="registerForm.controls['candidatProfil'].errors && registerForm.get('candidatProfil')?.touched">
+                        <div class="text-danger mb-3" *ngIf="registerForm.controls['candidatProfil'].hasError('required')">ce champ est obligatoire</div>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="col-sm-4 col-form-label" >Nombre Candidat :</label>
+                      <input type="number" class="form-control" formControlName="candidatnumber" placeholder="Nombre de Candidat Souhaité">
+                    </div>
+                    <div *ngIf="predictedNumber !== null" class="text-muted mb-3">Nombre prédit: {{ predictedNumber }}</div>
+                    <div class="text-danger mb-3" *ngIf="registerForm.controls['candidatnumber'].errors && registerForm.get('candidatnumber')?.touched">
+                        <div class="text-danger mb-3" *ngIf="registerForm.controls['candidatnumber'].hasError('required')">ce champ est obligatoire</div>
+                        <div class="text-danger mb-3" *ngIf="registerForm.controls['candidatnumber'].hasError('minlength')">minimum 2 candidature</div>
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="col-sm-4 col-form-label">Durée :</label>
+                      <input type="text" class="form-control" formControlName="duree" placeholder="Duree de l'offre">
+                    </div>
+                    <div class="text-danger mb-3" *ngIf="registerForm.controls['duree'].errors && registerForm.get('duree')?.touched">
+                      <div class="text-danger mb-3" *ngIf="registerForm.controls['duree'].hasError('required')">ce champ est obligatoire</div>
+                  </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="col-sm-4 col-form-label">Date 1 :</label>
+                      <input type="datetime-local" class="form-control" formControlName="date1">
+                    </div>
+                    <div class="text-danger mb-3" *ngIf="registerForm.controls['date1'].errors && registerForm.get('date1')?.touched">
+                      <div class="text-danger mb-3" *ngIf="registerForm.controls['date1'].hasError('required')">ce champ est obligatoire</div>
+                  </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="col-sm-4 col-form-label">Date 2 :</label>
+                      <input type="datetime-local" class="form-control" formControlName="date2">
+                    </div>
+                    <div class="text-danger mb-3" *ngIf="registerForm.controls['date2'].errors && registerForm.get('date2')?.touched">
+                      <div class="text-danger mb-3" *ngIf="registerForm.controls['date2'].hasError('required')">ce champ est obligatoire</div>
+                  </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="col-sm-4 col-form-label">Date 3 :</label>
+                      <input type="datetime-local" class="form-control" formControlName="date3">
+                    </div>
+                    <div class="text-danger mb-3" *ngIf="registerForm.controls['date3'].errors && registerForm.get('date3')?.touched">
+                      <div class="text-danger mb-3" *ngIf="registerForm.controls['date3'].hasError('required')">ce champ est obligatoire</div>
+                  </div>
+                      <div class="input-group input-group-outline mb-3">
+                        <label class="col-sm-4 col-form-label" >Description :</label>
+                        <textarea  class="form-control" formControlName="description" placeholder="Description de l'offre"></textarea>
+                      </div>
+                      <div class="text-danger mb-3" *ngIf="registerForm.controls['description'].errors && registerForm.get('description')?.touched">
+                          <div class="text-danger mb-3" *ngIf="registerForm.controls['description'].hasError('required')">ce champ est obligatoire</div>
+                      </div> 
+                      <div class="text-center">
+                        <button type="submit" [disabled]="registerForm.invalid" (click)="ajouter()" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Ajouter</button>
+                        <button type="submit" (click)="reset()" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Cancel</button>
+                      </div>               
+                    </form>
+                </ng-container>
+
+                <!-- Form for file upload -->
+                <ng-container *ngIf="showFileUpload">
+                  <form role="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="input-group input-group-outline mb-3">
+                      <label for="offerName" class="col-sm-4 col-form-label">Nom Offre :</label>
+                      <input type="text" class="form-control" formControlName="offerName" placeholder="Nom de l'offre">
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                        <label for="category" class="col-sm-4 col-form-label">Catégorie :</label>
+                        <select class="form-control" id="category" formControlName="offreCategory">
+                            <option value="" disabled selected>Veuillez choisir une catégorie</option>
+                          <option *ngFor="let category of categoryOptions" [value]="category">{{ category }}</option>
+                        </select>
+                        <div class="text-danger mb-3" *ngIf="registerForm.controls['offreCategory'].errors && registerForm.get('offreCategory')?.touched">
+                          <div class="text-danger mb-3" *ngIf="registerForm.controls['offreCategory'].hasError('required')">ce champ est obligatoire</div>
+                        </div>
+                      </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="col-sm-4 col-form-label">Upload Image/PDF:</label>
+                      <input type="file" class="form-control" formControlName="file">
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" (click)="ajouter()" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Ajouter</button>
+                      <button type="submit" (click)="reset()" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Cancel</button>
+                    </div>
+                  </form>
+                </ng-container>
+                <!-- Submit buttons -->
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-footer-index></app-footer-index>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core JS Files -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      };
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+</body>

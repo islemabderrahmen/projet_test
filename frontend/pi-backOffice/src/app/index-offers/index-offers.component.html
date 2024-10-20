@@ -1,0 +1,59 @@
+<section class="py-7">
+        <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mx-auto text-center">
+          <h2 class="text-primary mb-3" style="color: #ed3637">Les offres disponibles</h2>
+          <h2 class="mb-0">+50 offres disponibles</h2>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <ng-container *ngFor="let offer of listOffer; let i = index">
+          <div *ngIf="i<=2" class="col-lg-4 col-md-8">
+            <div class="card border border-primary" [ngStyle]="i % 2 !== 0 ? {'background-color': '#ed3637'} : null">
+              <div style="margin-left: 280px;" class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4">
+                
+                    <a [routerLink]="['/postuler', offer.idOffre]"><i class="material-icons opacity-10" >weekend</i></a>
+                </div>
+                <div class="card-body">
+                    <div class="author">
+                        <div class="name">
+                          <span class="d-inline-block" [ngClass]="i % 2 === 0 ? 'card-plain' : ' text-white'">Entreprise: {{offer.society.username}}</span>
+                          <div class="stats">
+                                <i class="far fa-clock" [ngClass]="i % 2 === 0 ? 'card-plain' : ' text-white'">{{offer.dateEmission}}</i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-4" [ngClass]="i % 2 === 0 ? 'card-plain' : ' text-white'">Profil souhaitée: {{offer.candidatProfil}}</p>
+                    <p class="mt-4" [ngClass]="i % 2 === 0 ? 'card-plain' : ' text-white'">
+                      {{ truncateDescription(offer.description, 50, offer.showFullDescriptionFlag) }}
+                      <a style="font-weight: bolder;" *ngIf="offer.description.length > 50" (click)="showFullDescription(offer)">
+                        {{ offer.showFullDescriptionFlag ? 'Voir moins' : 'Voir plus' }}
+                      </a>
+                    </p>      
+                    <div class="rating mt-3">
+                      <a (click)="addFavoris(offer.idOffre)">
+                      <i class="fas fa-star" [ngStyle]="i % 2 !== 0 ? {'color': 'white'}:{'color': '#ed3637'}"></i>
+                    </a>
+                    </div>          
+                  </div>
+                    
+            </div>
+        </div>   
+             
+        </ng-container>
+
+      </div>
+      <br><br>
+      <div class="row">
+        <div class="col-12 text-center">
+          <a
+            routerLink="/moreOffers"
+            class="btn btn-primary mb-5 mb-sm-0"
+          >
+            Voir plus
+          </a>
+        </div>
+      </div>
+      <hr class="horizontal dark my-5">
+    </div>
+  </section>

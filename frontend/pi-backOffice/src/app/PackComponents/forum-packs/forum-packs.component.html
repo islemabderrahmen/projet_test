@@ -1,0 +1,147 @@
+<section class="py-7">
+  <div class="container">
+    <div class="row">
+      <div class="row">
+        <div class="col-lg-6 mx-auto text-center">
+          <h2 class="text-gradient text-primary mb-3" style="color: black">
+            {{"Les packs offerts" | translate }}
+          </h2>
+          <p class="lead">
+            {{"Esprit vous offre une variété de packs soigneusement conçus pour répondre aux besoins des entreprises
+            participantes au forum." | translate }}
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-4" style="max-height: max-content">
+        <div class="card">
+          <div class="card-body">
+            <div class="author" style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+              <img style="width: 38px; height: 38px; margin-right: 5%" src="../../../assets/img/icons/lingot-dor.png"
+                alt="Diamond Logo" />
+              <h4 class="mb-0 font-weight-bolder">Gold</h4>
+            </div>
+            <ul class="custom-list">
+              <li>{{"Logo de l'entreprise en tête de page du site web du forum" | translate }}</li>
+              <li>{{"20 invitations pour le cocktail d'ouverture" | translate }}</li>
+              <li>{{"Diffusion de 2 offres d'emploi sur le site web du forum" | translate }}</li>
+            </ul>
+            <a class="text-dark font-weight-bold" style="float: right; text-decoration: underline"
+              (click)="ShowAvailablePackages(Gold)">{{"Voir Plus" | translate }}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="author" style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+              <img style="width: 38px; height: 38px; margin-right: 5%" src="../../../assets/img/icons/silver.png"
+                alt="Diamond Logo" />
+              <h4 class="mb-0 font-weight-bolder">Silver</h4>
+            </div>
+            <ul class="custom-list">
+              <li>{{"Logo de l'entreprise sur le site web du forum" | translate }}</li>
+              <li>{{"10 invitations pour le cocktail d'ouverture" | translate }}</li>
+              <li>{{"Diffusion d'une offre d'emploi sur le site web du forum" | translate }}</li>
+            </ul>
+            <a class="text-dark font-weight-bold" style="float: right; text-decoration: underline"
+              (click)="ShowAvailablePackages(Silver)">{{"Voir Plus" | translate }}</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4">
+        <div class="card card-rotate">
+          <div class="card-body">
+            <div class="author" style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+              <img style="width: 38px; height: 38px; margin-right: 5%" src="../../../assets/img/icons/platinum.png"
+                alt="Diamond Logo" />
+              <h4 class="mb-0 font-weight-bolder">Platinum</h4>
+            </div>
+
+            <ul class="custom-list">
+              <li>{{"Logo de l'entreprise le site web du forum" | translate }}</li>
+              <li>{{"30 invitations pour le cocktail d'ouverture" | translate }}</li>
+              <li>{{"Diffusion de 5 offres d'emploi sur le site web du forum" | translate }}</li>
+              <li>
+                {{"Insertion d'un flyer publicitaire dans les sacs des participants" | translate }}
+              </li>
+            </ul>
+            <a class="text-dark font-weight-bold" style="float: right; text-decoration: underline"
+              (click)="ShowAvailablePackages(Platinium)">{{"Voir Plus" | translate }}</a>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-8 py-3">
+        <div class="card card-rotate">
+          <div class="card-body">
+            <div class="author" style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+              <img style="width: 35px; height: 35px; margin-right: 5%" src="../../../assets/img/icons/diamant.png"
+                alt="Diamond Logo" />
+              <h4 class="mb-0 font-weight-bolder">Diamond</h4>
+            </div>
+            <br />
+            <ul class="custom-list">
+              <li>
+                {{"Logo de l'entreprise en tant que partenaire exclusif sur le site web du forum" | translate }}
+              </li>
+              <li>{{"50 invitations pour le cocktail d'ouverture" | translate }}</li>
+              <li>{{"Diffusion de 10 offres d'emploi sur le site web du forum" | translate }}</li>
+              <li>
+                {{"Insertion d'un flyer publicitaire dans les sacs des participants" | translate }}
+              </li>
+            </ul>
+
+            <a class="text-dark font-weight-bold" style="float: right; text-decoration: underline"
+              (click)="ShowAvailablePackages(Diamond)">{{"Voir Plus" | translate }}</a>
+          </div>
+        </div>
+        <br />
+      </div>
+      <div class="col-lg-4 col-md-8 py-3">
+        <div class="card card-rotate">
+          <div class="card-body">
+            <div class="author" style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              ">
+              <img style="width: 35px; height: 35px; margin-right: 5%" src="../../../assets/img/icons/star_616489.png"
+                alt="Diamond Logo" />
+              <h4 class="mb-0 font-weight-bolder">{{"Personalisé" | translate }}</h4>
+            </div>
+            <br />
+            <ul style="height: 10em">
+              <li>
+                {{"La personnalisation de votre pack vous offre l'opportunité de choisir le nombre d'offres à partager,
+                le nombre de badges et de flyers, ainsi que le type de stand qui vous convient le mieux." | translate }}
+              </li>
+            </ul>
+            <div class="text-center">
+              <button type="submit" (click)="renderToPersonalized()" class="btn bg-gradient-dark mt-3 mb-0">
+                {{"Personnaliser" | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+  </div>
+</section>

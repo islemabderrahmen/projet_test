@@ -1,0 +1,62 @@
+<body class="index-page bg-gray-200">
+    <div class="container position-sticky z-index-sticky top-0">
+        <div class="row">
+        <div class="col-12">
+        <app-navbar-index></app-navbar-index>
+    </div>
+    </div>
+    </div>
+    <app-header></app-header>
+    <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+        <section class="py-7">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 mx-auto text-center">
+                  <h2 class="text-gradient text-primary mb-3">{{"Les Demandes Disponibles" | translate }}</h2>
+                </div>
+                
+              </div>
+              <div class="row mt-5">
+                <!-- <form role="form" (ngSubmit)="filterOffers(criteria.value)">
+                  <input type="text" #criteria placeholder="recherche...">
+                  <button class="btn btn-primary" type="submit">Filter</button>
+                </form> -->
+                <div class="row mt-5">
+                  <ng-container *ngFor="let req of listRequests; let i = index">
+                    <div class="col-lg-4 col-md-8 mb-5">
+                      <div class="card border border-primary" [ngClass]="i % 2 === 0 ? 'card-plain' : 'bg-gradient-primary'">
+                          <div class="card-body">
+                              <div class="author">
+                                  <div class="name">
+                                      <div class="stats">
+                                          <i class="far fa-clock" [ngClass]="i % 2 === 0 ? 'card-plain' : ' text-white'">   date : {{req.date}}</i>
+                                      </div>
+                                      <h6 [ngClass]="i % 2 === 0 ? 'card-plain' : ' text-white'" class="mb-0 font-weight-bolder">quantity : {{req.quantity}}</h6>
+                                  </div>
+                              </div>
+                              <p class="mt-4" [ngClass]="i % 2 === 0 ? 'card-plain' : ' text-white'">category : {{req.category}}</p>
+                              <p class="mt-4" [ngClass]="i % 2 === 0 ? 'card-plain' : ' text-white'">
+                                {{ truncateDescription(req.description, 50, req.showFullDescriptionFlag) }}
+                                <a style="font-weight: bolder;" *ngIf="req.description.length > 50" (click)="showFullDescription(req)">
+                                  {{ req.showFullDescriptionFlag ? 'Voir moins' : 'Voir plus' }}
+                                </a>
+                              </p> 
+                              <button class="btn bg-gradient-light mb-0" (click)="navigateToAddDevis(req.idRequestSupply)">
+                                  <i class="material-icons text-sm me-2">add</i>ajouter devis
+                                </button>
+                                           
+                          </div>
+                      </div>
+                  </div>   
+                       
+                  </ng-container>
+                </div>
+              </div>
+              <hr class="horizontal dark my-5">
+            </div>
+          </section>
+          
+           
+        </div>
+          <app-footer-index></app-footer-index>
+          </body>

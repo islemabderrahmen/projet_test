@@ -1,0 +1,87 @@
+<section class="py-7">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mx-auto text-center">
+        <h2 class="text-gradient text-primary mb-3">{{"Les offres disponibles" | translate }}</h2>
+        <h2 class="mb-0">{{"Les offres les plus demandées" | translate }}</h2>
+        <!-- Condition pour afficher le texte -->
+      </div>
+    </div>
+    <div class="row mt-3">
+      <ng-container *ngFor="let offer of listOffer; let i = index">
+        <div *ngIf="i <= 2" class="col-lg-4 col-md-8">
+          <div
+            class="card border border-primary"
+            [ngClass]="i % 2 === 0 ? 'card-plain' : 'bg-gradient-primary'"
+          >
+            <div
+              style="margin-left: 280px"
+              class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4"
+            >
+              <a (click)="getCandidatOffer(offer.idOffre)"
+                ><i class="material-icons opacity-10">weekend</i></a
+              >
+            </div>
+            <div class="card-body">
+              <div class="author">
+                <div class="name">
+                  <h6 class="mb-0 font-weight-bolder" [ngClass]="i % 2 === 0 ? 'card-plain' : ' text-white'">{{ offer.offerName }}</h6>
+                  <div class="stats">
+                    <i
+                      class="far fa-clock"
+                      [ngClass]="i % 2 === 0 ? 'card-plain' : ' text-white'"
+                      >{{ offer.dateEmission }}</i
+                    >
+                  </div>
+                </div>
+              </div>
+              <p
+                class="mt-4"
+                [ngClass]="i % 2 === 0 ? 'card-plain' : ' text-white'"
+              >
+                {{"Profil souhaité" | translate }} : {{ offer.candidatProfil }}
+              </p>
+              <p
+                class="mt-4"
+                [ngClass]="i % 2 === 0 ? 'card-plain' : ' text-white'"
+              >
+                {{
+                  truncateDescription(
+                    offer.description,
+                    50,
+                    offer.showFullDescriptionFlag
+                  )
+                }}
+                <a
+                  style="font-weight: bolder"
+                  *ngIf="offer.description.length > 50"
+                  (click)="showFullDescription(offer)"
+                >
+                  {{
+                    offer.showFullDescriptionFlag ? "Voir moins" : "Voir plus"
+                  }}
+                </a>
+              </p>
+              <div class="rating mt-3">
+                <a (click)="Favoris(offer.idOffre)">
+                <i class="fas fa-star"  [ngStyle]="i % 2 !== 0 ? {'color': 'white'}:{'color': '#d63384'}"></i>
+                </a>
+              </div>      
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="row">
+      <div class="col-12 text-center">
+        <a
+          routerLink="/moreOffers"
+          class="btn bg-gradient-primary mb-5 mb-sm-0"
+        >
+          {{"Voir plus" | translate }}
+        </a>
+      </div>
+    </div>
+    <hr class="horizontal dark my-5" />
+  </div>
+</section>

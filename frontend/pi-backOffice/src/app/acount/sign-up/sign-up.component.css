@@ -1,0 +1,23 @@
+.form-select {
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  color: #8898aa;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #cad1d7;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-select option {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    color: #8898aa;
+    background-color: #fff;
+    border: 1px solid #cad1d7;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+.form-select option:checked {
+    background-color: #212529;
+    color: #fff;
+  }

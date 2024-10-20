@@ -1,0 +1,455 @@
+<body class="g-sidenav-show bg-gray-200">
+  <div class="row">
+    <div class="col-3">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-9">
+      <app-navbar [currentScreen]="'Pack'"></app-navbar>
+      <main class="main-content position-relative border-radius-lg">
+        <div class="col-md-12 mb-lg-0 mb-4">
+          <div class="card mt-4">
+            <div class="card-header pb-0 p-3">
+              <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                  <h6 class="mb-0">Liste des Packs</h6>
+                </div>
+                <div class="col-6 text-end">
+                  <button class="btn bg-gradient-dark mb-0" (click)="addPack()"
+                    ><i class="material-icons text-sm">add</i
+                    >&nbsp;&nbsp;Ajouter un nouveau Pack</button
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-3"></div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-12">
+            <div class="card my-4">
+              <div
+                class="card-header p-0 position-relative mt-n4 mx-3 z-index-1"
+              >
+                <div
+                  class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3"
+                >
+                  <h6 class="text-white text-capitalize ps-3">
+                    Liste des Packs
+                  </h6>
+                </div>
+              </div>
+              <div class="card-body px-0 pb-2">
+                <div class="table-responsive">
+                  <table class="table table-sm align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-sm"
+                        >
+                          Type du Pack
+                        </th>
+
+                        <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-sm"
+                        >
+                          Prix
+                        </th>
+                        <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-sm"
+                        >
+                          Numéro du Stand
+                        </th>
+                        <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-sm"
+                        >
+                          statut de réservation
+                        </th>
+                        <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-sm"
+                        >
+                          Date de réservation
+                        </th>
+                        <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-sm">
+                          Réservé Par
+                        </th>
+                        <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-sm"
+                        >
+                          Date de Validation
+                        </th>
+                        <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-sm"
+                        >
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let pack of packs">
+                        <td class="align-middle text-center text-sm">
+                          <h6 class="mb-0 text-sm">
+                            <span *ngIf="pack.typePack.toString() === 'Silver'" class="badge" style="background-image: linear-gradient(to right, #CCCCCC, #888888); color: #000000;">Silver</span>
+                            <span *ngIf="pack.typePack.toString() === 'Gold'" class="badge" style="background-image: linear-gradient(to right, #FFD700, #FFA500); color: #000000;">Gold</span>
+                            <span *ngIf="pack.typePack.toString() === 'Platinum'" class="badge" style="background-image: linear-gradient(to right, #e3d3d5, #B76E79); color: #000000;">Platinum</span>
+                            <span *ngIf="pack.typePack.toString() === 'Diamond'" class="badge" style="background-image: linear-gradient(to right, #0E4DA4, #0080FF); color: #FFFFFF;">Diamond</span>
+                            <span *ngIf="pack.typePack.toString() === 'Personalized'" class="badge" style="background-image: linear-gradient(to right, #8b0ea4, #c598d0); color: #FFFFFF;">Personalisé</span>
+                          </h6>
+                        </td>
+
+                        <td class="align-middle text-center text-sm">
+                          {{ pack?.prix ?? "_" }}
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <h6 class="mb-0 text-sm">
+                            {{ pack?.stand?.number ?? "_" }}
+                          </h6>
+                        </td>
+                       
+                        <td class="align-middle text-center text-sm">
+                           
+                            <div *ngIf="pack.reservationStatus === 'Reserved'">
+                                <span class="badge badge-sm bg-gradient-primary" >Réservé</span>
+                            </div>
+                            
+                            <div *ngIf="pack.reservationStatus === 'Not_Reserved'">
+                                <span class="badge badge-sm bg-gradient-info" >Non réservé</span>
+                            </div>
+                            
+                            <div *ngIf="pack.reservationStatus === 'On_Hold'">
+                                <span class="badge badge-sm bg-gradient-warning">En cours</span>
+                            </div>
+                        </td>
+
+                        <td class="align-middle text-center text-sm">
+                          <h6 class="mb-0 text-sm">
+                            {{ pack?.reservationDate ?? "_" }}
+                          </h6>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <h6 class="mb-0 text-sm"> {{ pack?.reserver?.username ?? "_"}}</h6>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <h6 class="mb-0 text-sm">
+                            {{ pack?.validationDate ?? "_" }}
+                          </h6>
+                        </td>
+                        <td class="align-middle">
+                          <div class="ms-auto text-end">
+                            <button class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" (click)="openDialog(pack.id,'supprimer')">
+                              <i class="fas fa-trash text-sm me-2"></i> Supprimer
+                            </button>
+                        
+                            <button class="btn btn-link text-success text-gradient px-3 mb-0" href="javascript:;" (click)="openDialog(pack.id,'valider')">
+                              <i class="fas fa-check-circle text-sm me-2"></i> Valider
+                            </button>
+                        
+                            <button class="btn btn-link text-warning text-gradient px-3 mb-0" href="javascript:;" (click)="openDialog(pack.id,'annuler')">
+                              <i class="fas fa-times-circle text-sm me-2"></i> Annuler
+                            </button>
+                        
+                            <button class="btn btn-link text-dark px-3 mb-0" [routerLink]="['/editPack', pack.id]">
+                              <i class="fas fa-edit text-sm me-2"></i> Modifier
+                            </button>
+                          </div>
+                        </td>
+                        
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <app-footer-index></app-footer-index>
+        <app-popup-dialog
+        [id]="currentId"
+        [title]="
+          currentAction === 'supprimer' ? 'Supprimer le pack' : 'valider' ? 'Valider la reservation' : 'Annuler la reservation'
+        "
+        [content]="
+           currentAction === 'supprimer' ? 'Vous etes sure de vouloir supprimer ce pack ? ' : 'valider' ? 'Vous etes sure de valider cette réservation ' : 'Vous etes sure de vouloir annuler la reservation du pack '
+        "
+        (send)="handleDialogAction($event)"
+      ></app-popup-dialog>
+      </main>
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script>
+    var ctx = document.getElementById("chart-bars").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["M", "T", "W", "T", "F", "S", "S"],
+        datasets: [
+          {
+            label: "Sales",
+            tension: 0.4,
+            borderWidth: 0,
+            borderRadius: 4,
+            borderSkipped: false,
+            backgroundColor: "rgba(255, 255, 255, .8)",
+            data: [50, 20, 10, 22, 50, 10, 40],
+            maxBarThickness: 6,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        interaction: {
+          intersect: false,
+          mode: "index",
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: "rgba(255, 255, 255, .2)",
+            },
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: "normal",
+                lineHeight: 2,
+              },
+              color: "#fff",
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: "rgba(255, 255, 255, .2)",
+            },
+            ticks: {
+              display: true,
+              color: "#f8f9fa",
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: "normal",
+                lineHeight: 2,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+    new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [
+          {
+            label: "Mobile apps",
+            tension: 0,
+            borderWidth: 0,
+            pointRadius: 5,
+            pointBackgroundColor: "rgba(255, 255, 255, .8)",
+            pointBorderColor: "transparent",
+            borderColor: "rgba(255, 255, 255, .8)",
+            borderColor: "rgba(255, 255, 255, .8)",
+            borderWidth: 4,
+            backgroundColor: "transparent",
+            fill: true,
+            data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+            maxBarThickness: 6,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        interaction: {
+          intersect: false,
+          mode: "index",
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: "rgba(255, 255, 255, .2)",
+            },
+            ticks: {
+              display: true,
+              color: "#f8f9fa",
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: "normal",
+                lineHeight: 2,
+              },
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5],
+            },
+            ticks: {
+              display: true,
+              color: "#f8f9fa",
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: "normal",
+                lineHeight: 2,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+
+    new Chart(ctx3, {
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [
+          {
+            label: "Mobile apps",
+            tension: 0,
+            borderWidth: 0,
+            pointRadius: 5,
+            pointBackgroundColor: "rgba(255, 255, 255, .8)",
+            pointBorderColor: "transparent",
+            borderColor: "rgba(255, 255, 255, .8)",
+            borderWidth: 4,
+            backgroundColor: "transparent",
+            fill: true,
+            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+            maxBarThickness: 6,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        interaction: {
+          intersect: false,
+          mode: "index",
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: "rgba(255, 255, 255, .2)",
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: "#f8f9fa",
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: "normal",
+                lineHeight: 2,
+              },
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5],
+            },
+            ticks: {
+              display: true,
+              color: "#f8f9fa",
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: "normal",
+                lineHeight: 2,
+              },
+            },
+          },
+        },
+      },
+    });
+  </script>
+  <script>
+    var win = navigator.platform.indexOf("Win") > -1;
+    if (win && document.querySelector("#sidenav-scrollbar")) {
+      var options = {
+        damping: "0.5",
+      };
+      Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+</body>

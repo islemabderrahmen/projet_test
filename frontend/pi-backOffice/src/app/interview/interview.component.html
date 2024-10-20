@@ -1,0 +1,80 @@
+<body class="g-sidenav-show bg-gray-200">
+  <div class="row">
+    <div class="col-3">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-9">
+      <app-navbar></app-navbar>
+      <div class="main-content position-relative ">
+        <div class="container-fluid px-2 px-md-4">
+          <div
+            class="page-header min-height-300 border-radius-xl mt-4"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            "
+          >
+            <span class="mask bg-gradient-primary opacity-6"></span>
+          </div>
+          <div class="card card-body mx-3 mx-md-4 mt-n6">
+            <div class="row">
+              <div class="col-lg-8">
+                <form
+                  role="form"
+                  [formGroup]="registerForm" (ngSubmit)="onSubmit()"  >
+                 
+                    <div class="input-group input-group-outline row mb-3">
+                      <label class="col-sm-4 col-form-label" > Date</label >
+                      <input
+                      type="datetime-local" class="form-control" formControlName="date"
+                        id="date"/>
+                    </div>
+
+                    <div class="input-group input-group-outline row mb-3">
+                      <label  class="col-sm-4 col-form-label" >Titre :</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="titre"
+                        placeholder="titre" />
+                    </div>
+                 
+                    <div class="input-group input-group-outline row mb-3">
+                      <label for="matricule" class="col-sm-4 col-form-label"> Type d'entretien:</label>
+                        <select class="form-control" formControlName="interviewType">
+                             <option>choisir une option</option>
+                            <option value="online">En ligne</option>
+                            <option value="inRoom">En salle</option>
+                        </select>
+                    </div>
+                    
+                    <div *ngIf="isInRoom">
+                    <div class="input-group input-group-outline row mb-3">
+                      <label class="col-sm-4 col-form-label"   >Salle :</label >
+                      
+                        <select class="form-control" formControlName="room">
+                            <option *ngFor="let r of rooms" [value]="r.num">{{ r.num }}</option>
+                        </select>
+                   
+                    </div>
+                    <div class="text-center">
+                      <button (click)="Add()" type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Add</button>
+                    </div>
+                    </div>
+                    <div *ngIf="isOnline">
+                      <div class="text-center">
+                        <button (click)="Add1()" type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Add</button>
+                      </div>
+                      
+                    </div>
+                    <div class="text-center">
+                      <a (click)="Annuler()" type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Cancel</a>
+                    </div>
+                    </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

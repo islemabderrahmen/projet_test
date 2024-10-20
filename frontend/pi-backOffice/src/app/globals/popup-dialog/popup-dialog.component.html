@@ -1,0 +1,19 @@
+<div id="popup" class="popup">
+  <div class="popup-content border rounded p-4" style="max-width: 400px">
+    <span class="close" (click)="closeDialog()">&times;</span>
+    <h4 class="popup-title">{{ title }}</h4>
+    <div class="popup-body text-center">
+      <p class="popup-text text-center mt-3">
+        {{ content }}
+      </p>
+    </div>
+    <div class="d-flex justify-content-between mt-4">
+      <button class="btn btn-dark" (click)="closeDialog()">
+        {{ "Annuler" | translate }}
+      </button>
+      <button class="btn btn-primary me-2" (click)="confirm()">
+        {{ "Confirmer" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,243 @@
+<body class="g-sidenav-show bg-gray-200">
+  <div class="row">
+    <div class="col-3">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-9">
+      <app-navbar [currentScreen]="'Individuals' | translate"></app-navbar>
+      <main class="main-content position-relative border-radius-lg">
+        <div class="col-md-12 mb-lg-0 mb-4">
+          <div class="card mt-4">
+            <div class="card-header pb-0 p-3">
+              <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                  <h6 class="mb-0">{{ "List of individuals" | translate }}</h6>
+                </div>
+                <div class="col-6 text-end">
+                  <a
+                    class="btn bg-gradient-dark mb-0"
+                    routerLink="/associations"
+                    ><i class="material-icons text-lg">link</i
+                    ><span class="ms-1">{{
+                      "List of associations" | translate
+                    }}</span></a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-2"></div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-12">
+            <div class="card my-4">
+              <div
+                class="card-header p-0 position-relative mt-n4 mx-3 z-index-1"
+              >
+                <div
+                  class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3 px-3"
+                >
+                  <form
+                    [formGroup]="listFilter"
+                    class="text-start"
+                    (ngSubmit)="searchFilter(listFilter)"
+                  >
+                    <div class="row">
+                      <div class="col-md-4 mb-3">
+                        <select class="form-select" formControlName="role">
+                          <option value="" selected>
+                            {{ "Select Role" | translate }}
+                          </option>
+                          <option
+                            *ngFor="let role of individuRole"
+                            [value]="role"
+                          >
+                            {{ role }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-md-4">
+                        <input
+                          type="text"
+                          class="form-control bg-light"
+                          formControlName="search"
+                          placeholder="{{ 'Search...' | translate }}"
+                        />
+                      </div>
+                      <div class="col-md-4">
+                        <button
+                          type="submit"
+                          class="btn bg-gradient-dark w-100"
+                        >
+                          {{ "Search" | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="card-body px-0 pb-2">
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          {{ "First name" | translate }}
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          {{ "Last name" | translate }}
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          {{ "Identity" | translate }}
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          {{ "Role" | translate }}
+                        </th>
+                        <th
+                          class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          {{ "Actions" | translate }}
+                        </th>
+                        <th class="text-secondary opacity-7"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let individu of individus">
+                        <td>
+                          <h6 class="mb-0 text-sm text-center">
+                            {{ individu?.firstName ?? "_" }}
+                          </h6>
+                        </td>
+                        <td>
+                          <h6 class="mb-0 text-sm text-center">
+                            {{ individu?.lastName ?? "_" }}
+                          </h6>
+                        </td>
+                        <td>
+                          <h6 class="mb-0 text-sm text-center">
+                            {{ individu?.identity ?? "_" }}
+                          </h6>
+                        </td>
+                        <td>
+                          <h6 class="mb-0 text-sm text-center">
+                            {{ individu?.role }}
+                          </h6>
+                        </td>
+                        <td class="align-middle d-flex">
+                          <div class="mr-2 ms-1" *ngIf="!individu.approve">
+                            <button
+                              class="btn btn-danger btn-sm"
+                              (click)="
+                                openDialog(
+                                  individu.id,
+                                  'approve',
+                                  individu.activate
+                                )
+                              "
+                            >
+                              {{ "Inapproved" | translate }}
+                            </button>
+                          </div>
+                          <div class="mr-2 ms-1" *ngIf="individu.activate">
+                            <button
+                              class="btn btn-info btn-sm"
+                              (click)="
+                                openDialog(
+                                  individu.id,
+                                  'activate',
+                                  individu.activate
+                                )
+                              "
+                            >
+                              {{ "Activated" | translate }}
+                            </button>
+                          </div>
+                          <div class="mr-2 ms-1" *ngIf="!individu.activate">
+                            <button
+                              class="btn btn-danger btn-sm"
+                              (click)="
+                                openDialog(
+                                  individu.id,
+                                  'activate',
+                                  individu.activate
+                                )
+                              "
+                            >
+                              {{ "Desactivated" | translate }}
+                            </button>
+                          </div>
+                          <div class="mr-2 ms-1">
+                            <button
+                              class="btn btn-dark btn-sm"
+                              [routerLink]="['/user-details', individu.id]"
+                            >
+                              {{ "More details" | translate }}
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr *ngIf="!individus || individus.length === 0">
+                        <td colspan="5" class="text-center">
+                          {{ "No data available" | translate }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br />
+        <br />
+        <app-footer-index></app-footer-index>
+        <app-popup-dialog
+          [id]="currentId"
+          [title]="
+            currentAction === 'approve'
+              ? ('Approve user' | translate)
+              : ((typeOfActivation ? 'Deactivate' : 'Activate') + ' user'
+                | translate)
+          "
+          [content]="
+            currentAction === 'approve'
+              ? ('Do you want to approve this user?' | translate)
+              : ('Do you want to ' +
+                  (typeOfActivation ? 'deactivate' : 'activate') +
+                  ' this user?' | translate)
+          "
+          (send)="handleDialogAction($event)"
+        ></app-popup-dialog>
+      </main>
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf("Win") > -1;
+    if (win && document.querySelector("#sidenav-scrollbar")) {
+      var options = {
+        damping: "0.5",
+      };
+      Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+</body>

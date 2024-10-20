@@ -1,0 +1,79 @@
+<body class="g-sidenav-show bg-gray-200">
+  <div class="row">
+    <div class="col-3">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-9">
+      <app-navbar [currentScreen]="'Ajouter Demande'"></app-navbar>
+      <main class="main-content position-relative  border-radius-lg ">
+        <br>
+        <div class="row">
+          <div class="col-12">
+            <div class="card my-4">
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                  <h6 class="text-white text-capitalize ps-3">ajouter demande </h6>
+                </div>
+              </div> 
+              <div class="card-body px-0 pb-2">
+                <div class="col-md-12 mb-lg-0 mb-4">
+                  <div class="card mt-4">
+                    <div class="card-header pb-0 p-3">
+                      <div class="row">
+                        <form role="form" [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+                          <div class="input-group input-group-outline mb-3">
+                            <label class="col-sm-4 col-form-label">Quantité :</label>
+                            <input type="number" class="form-control" formControlName="quantity" placeholder="quantité">
+                            <div class="text-danger" *ngIf="requestForm.controls['quantity'].errors && requestForm.get('quantity')?.touched">
+                              <div *ngIf="requestForm.controls['quantity'].hasError('required')">Ce champ est obligatoire</div>
+                            </div>
+                          </div>
+                          <div class="input-group input-group-outline mb-3">
+                            <label class="col-sm-4 col-form-label">Catégorie :</label>
+                            <input type="text" class="form-control" formControlName="category" placeholder="categorie">
+                            <div class="text-danger" *ngIf="requestForm.controls['category'].errors && requestForm.get('category')?.touched">
+                              <div *ngIf="requestForm.controls['category'].hasError('required')">Ce champ est obligatoire</div>
+                            </div>
+                          </div>
+                          <div class="input-group input-group-outline mb-3">
+                            <label class="col-sm-4 col-form-label">Date :</label>
+                            <!-- Update the min attribute to use minDatePlusValidity -->
+                            <input type="date" class="form-control" formControlName="date" placeholder="date" [min]="minDatePlusValidity.toISOString()" (change)="onChangeDate($event)">
+                          </div>
+                          <div class="text-danger" *ngIf="requestForm.controls['date'].errors && requestForm.get('date')?.touched">
+                            <div *ngIf="requestForm.controls['date'].hasError('required')">Ce champ est obligatoire</div>
+                            <div *ngIf="requestForm.controls['date'].hasError('min')">
+                              La date doit être au moins {{ requestForm.get('validity')?.value }} jours après aujourd'hui.
+                            </div>
+                          </div>
+                          <div class="input-group input-group-outline mb-3">
+                            <label class="col-sm-4 col-form-label">Description :</label>
+                            <input type="text" class="form-control" formControlName="description" placeholder="description">
+                            <div class="text-danger" *ngIf="requestForm.controls['description'].errors && requestForm.get('description')?.touched">
+                              <div *ngIf="requestForm.controls['description'].hasError('required')">Ce champ est obligatoire</div>
+                            </div>
+                          </div>
+                          <div class="input-group input-group-outline mb-3">
+                            <label class="col-sm-4 col-form-label">Validité :</label>
+                            <input type="number" class="form-control" formControlName="validity" placeholder="validité">
+                            <div class="text-danger" *ngIf="requestForm.controls['validity'].errors && requestForm.get('validity')?.touched">
+                              <div *ngIf="requestForm.controls['validity'].hasError('required')">Ce champ est obligatoire</div>
+                            </div>
+                          </div>
+                          <div class="text-center">
+                            <button type="submit" [disabled]="requestForm.invalid" (click)="ajouter()" class="btn bg-gradient-primary  my-4 mb-2">ajouter</button>
+                            <button type="submit" (click)="reset()" class="btn bg-gradient-primary  my-4 mb-2"style="margin-left: 10px;">annuler</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,346 @@
+<body class="g-sidenav-show bg-gray-200">
+    <div class="row">
+        <div class="col-3">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="col-9">
+            <app-navbar [currentScreen]="'Ajouter Forum'"></app-navbar>
+            <main class="main-content position-relative  border-radius-lg">
+              
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="card my-4">
+                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                    <h6 class="text-white text-capitalize ps-3">Ajouter Un Forum</h6>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                               
+                                <form [formGroup]="addForumForm" (ngSubmit)="onSubmit()">
+                                    <div class="input-group input-group-outline row mb-3">
+                                        <label class="col-sm-4 col-form-label" for="theme">Thème :</label>
+                                        <input type="text" class="form-control" placeholder="Thème" formControlName="theme">
+                                        <div class="text-danger" *ngIf="addForumForm.get('theme')?.invalid && addForumForm.get('theme')?.touched">
+                                            Le thème est requis
+                                        </div>
+                                    </div>
+                                    <div class="input-group input-group-outline row mb-3">
+                                        <label class="col-sm-4 col-form-label" for="theme">Affiche :</label>
+                                        <input class="form-control"  type="file" formControlName="affiche" id="affiche" (change)="onImageSelected($event)">
+                                        <div class="text-danger" *ngIf="addForumForm.get('affiche')?.invalid && addForumForm.get('affiche')?.touched">
+                                            L'affiche est requise
+                                        </div>
+                                    </div>
+                                    <div class="input-group input-group-outline row mb-3">
+                                        <label class="col-sm-4 col-form-label" for="theme">Date :</label>
+                                        <input type="date" class="form-control" placeholder="Date du forum" formControlName="date">
+                                        <div class="text-danger" *ngIf="addForumForm.get('date')?.invalid && addForumForm.get('date')?.touched">
+                                            La date est requise
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="input-group input-group-outline row mb-3">
+                                        <label class="col-sm-4 col-form-label" for="theme">Localisation :</label>
+                                        <input type="text" class="form-control" placeholder="localisation" formControlName="localisation">
+                                        <div class="text-danger" *ngIf="addForumForm.get('localisation')?.invalid && addForumForm.get('localisation')?.touched">
+                                            La localisation est requise
+                                        </div>
+                                    </div>
+                                    <div class="input-group input-group-outline row mb-3">
+                                        <label class="col-sm-4 col-form-label" for="theme">Description :</label>
+                                        <input type="textArea" class="form-control" placeholder="description" formControlName="description">
+                                        <div class="text-danger" *ngIf="addForumForm.get('description')?.invalid && addForumForm.get('description')?.touched">
+                                            La description du forum est requise
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn bg-gradient-primary" >
+                                            Ajouter
+                                        </button>
+                                    </div>
+                                </form>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+             
+                <br>
+                <br><br><br><br>x
+                <app-footer-index></app-footer-index>
+            </main>
+        </div>
+    </div>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/chartjs.min.js"></script>
+    <script>
+        var ctx = document.getElementById("chart-bars").getContext("2d");
+
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: ["M", "T", "W", "T", "F", "S", "S"],
+                datasets: [
+                    {
+                        label: "Sales",
+                        tension: 0.4,
+                        borderWidth: 0,
+                        borderRadius: 4,
+                        borderSkipped: false,
+                        backgroundColor: "rgba(255, 255, 255, .8)",
+                        data: [50, 20, 10, 22, 50, 10, 40],
+                        maxBarThickness: 6,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+                interaction: {
+                    intersect: false,
+                    mode: "index",
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5],
+                            color: "rgba(255, 255, 255, .2)",
+                        },
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 500,
+                            beginAtZero: true,
+                            padding: 10,
+                            font: {
+                                size: 14,
+                                weight: 300,
+                                family: "Roboto",
+                                style: "normal",
+                                lineHeight: 2,
+                            },
+                            color: "#fff",
+                        },
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5],
+                            color: "rgba(255, 255, 255, .2)",
+                        },
+                        ticks: {
+                            display: true,
+                            color: "#f8f9fa",
+                            padding: 10,
+                            font: {
+                                size: 14,
+                                weight: 300,
+                                family: "Roboto",
+                                style: "normal",
+                                lineHeight: 2,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+
+        var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+        new Chart(ctx2, {
+            type: "line",
+            data: {
+                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                datasets: [
+                    {
+                        label: "Mobile apps",
+                        tension: 0,
+                        borderWidth: 0,
+                        pointRadius: 5,
+                        pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                        pointBorderColor: "transparent",
+                        borderColor: "rgba(255, 255, 255, .8)",
+                        borderColor: "rgba(255, 255, 255, .8)",
+                        borderWidth: 4,
+                        backgroundColor: "transparent",
+                        fill: true,
+                        data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+                        maxBarThickness: 6,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+                interaction: {
+                    intersect: false,
+                    mode: "index",
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5],
+                            color: "rgba(255, 255, 255, .2)",
+                        },
+                        ticks: {
+                            display: true,
+                            color: "#f8f9fa",
+                            padding: 10,
+                            font: {
+                                size: 14,
+                                weight: 300,
+                                family: "Roboto",
+                                style: "normal",
+                                lineHeight: 2,
+                            },
+                        },
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            borderDash: [5, 5],
+                        },
+                        ticks: {
+                            display: true,
+                            color: "#f8f9fa",
+                            padding: 10,
+                            font: {
+                                size: 14,
+                                weight: 300,
+                                family: "Roboto",
+                                style: "normal",
+                                lineHeight: 2,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+
+        var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+
+        new Chart(ctx3, {
+            type: "line",
+            data: {
+                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                datasets: [
+                    {
+                        label: "Mobile apps",
+                        tension: 0,
+                        borderWidth: 0,
+                        pointRadius: 5,
+                        pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                        pointBorderColor: "transparent",
+                        borderColor: "rgba(255, 255, 255, .8)",
+                        borderWidth: 4,
+                        backgroundColor: "transparent",
+                        fill: true,
+                        data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                        maxBarThickness: 6,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+                interaction: {
+                    intersect: false,
+                    mode: "index",
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5],
+                            color: "rgba(255, 255, 255, .2)",
+                        },
+                        ticks: {
+                            display: true,
+                            padding: 10,
+                            color: "#f8f9fa",
+                            font: {
+                                size: 14,
+                                weight: 300,
+                                family: "Roboto",
+                                style: "normal",
+                                lineHeight: 2,
+                            },
+                        },
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            borderDash: [5, 5],
+                        },
+                        ticks: {
+                            display: true,
+                            color: "#f8f9fa",
+                            padding: 10,
+                            font: {
+                                size: 14,
+                                weight: 300,
+                                family: "Roboto",
+                                style: "normal",
+                                lineHeight: 2,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    </script>
+    <script>
+        var win = navigator.platform.indexOf("Win") > -1;
+        if (win && document.querySelector("#sidenav-scrollbar")) {
+            var options = {
+                damping: "0.5",
+            };
+            Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+</body>

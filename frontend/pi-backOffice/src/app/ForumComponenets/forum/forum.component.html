@@ -1,0 +1,448 @@
+<body class="g-sidenav-show bg-gray-200">
+  <div class="row">
+    <div class="col-3">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-9">
+      <app-navbar [currentScreen]="'Forum'"></app-navbar>
+      <main class="main-content position-relative border-radius-lg">
+        <div class="col-md-12 mb-lg-0 mb-4">
+          <div class="card mt-4">
+            <div class="card-header pb-0 p-3">
+              <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                  <h6 class="mb-0">Liste des Forum</h6>
+                </div>
+                <div class="col-6 text-end">
+                  <button
+                    class="btn bg-gradient-dark mb-0"
+                    (click)="addForum()"
+                  >
+                    <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Ajouter
+                    un nouveau Forum
+                  </button>
+                </div>
+                <div *ngIf="openPopup"></div>
+              </div>
+            </div>
+            <div class="card-body p-3"></div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-12">
+            <div class="card my-4">
+              <div
+                class="card-header p-0 position-relative mt-n4 mx-3 z-index-1"
+              >
+                <div
+                  class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3"
+                >
+                  <h6 class="text-white text-capitalize ps-3">
+                    Historique des Forums
+                  </h6>
+                </div>
+              </div>
+              <div class="card-body px-0 pb-2">
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th
+                          class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          Theme
+                        </th>
+
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          Status
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          Date
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          Localisation
+                        </th>
+                        <th
+                          class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                        >
+                          Actions
+                        </th>
+                        <th class="text-secondary opacity-7"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let forum of forums">
+                        <td class="align-middle text-center">
+                            <h6 class="mb-0 text-sm">
+                              {{ forum?.theme ?? "_" }}
+                            </h6>
+                          </td>
+                        <td class="align-middle text-center text-sm">
+                          <div *ngIf="forum.forumStatus.toString() === 'Done'">
+                            <span class="badge badge-sm bg-gradient-dark"
+                              >Done</span
+                            >
+                          </div>
+                          <div
+                            *ngIf="
+                              forum.forumStatus.toString() === 'In_Progress'
+                            "
+                          >
+                            <span class="badge badge-sm bg-gradient-info"
+                              >En cours</span
+                            >
+                          </div>
+                          <div
+                            *ngIf="forum.forumStatus.toString() === 'Canceled'"
+                          >
+                            <span class="badge badge-sm bg-gradient-warning"
+                              >Annulé</span
+                            >
+                          </div>
+                        </td>
+                        <td class="align-middle text-center">
+                          <h6 class="mb-0 text-sm">
+                            {{ forum?.date ?? "_" }}
+                          </h6>
+                        </td>
+                        <td class="align-middle text-center">
+                          <h6 class="mb-0 text-sm">
+                            {{ forum?.localisation ?? "_" }}
+                          </h6>
+                        </td>
+                        <td class="align-middle">
+                          <div class="ms-auto text-end">
+                            <button
+                              *ngIf="
+                                forum.forumStatus.toString() === 'In_Progress'
+                              "
+                              class="btn btn-link text-warning text-gradient px-3 mb-0"
+                              href="javascript:;"
+                              href="javascript:;"
+                              (click)="openDialog(forum.id, 'cancel')"
+                            >
+                              <i class="fas fa-times-circle text-sm me-2"></i>
+                              Annuler
+                            </button>
+                            <button
+                              class="btn btn-link text-danger text-gradient px-3 mb-0"
+                              href="javascript:;"
+                              (click)="openDialog(forum.id, 'delete')"
+                            >
+                              <i class="material-icons text-sm me-2">delete</i
+                              >Supprimer
+                            </button>
+                            <button
+                              class="btn btn-link text-dark px-3 mb-0"
+                              [routerLink]="['/editForum', forum.id]"
+                            >
+                              <i class="material-icons text-sm me-2">edit</i
+                              >Modifier
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <app-footer-index></app-footer-index>
+        <app-popup-dialog
+          [id]="currentId"
+          [title]="
+            currentAction === 'cancel'
+              ? 'Annulation du forum'
+              : 'Suppression du forum'
+          "
+          [content]="
+            currentAction === 'cancel'
+              ? 'Vous etes sure de vouloir annuler le forum ? '
+              : 'Vous etes sure de vouloir supprimer le forum '
+          "
+          (send)="handleDialogAction($event)"
+        ></app-popup-dialog>
+      </main>
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script>
+    var ctx = document.getElementById("chart-bars").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["M", "T", "W", "T", "F", "S", "S"],
+        datasets: [
+          {
+            label: "Sales",
+            tension: 0.4,
+            borderWidth: 0,
+            borderRadius: 4,
+            borderSkipped: false,
+            backgroundColor: "rgba(255, 255, 255, .8)",
+            data: [50, 20, 10, 22, 50, 10, 40],
+            maxBarThickness: 6,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        interaction: {
+          intersect: false,
+          mode: "index",
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: "rgba(255, 255, 255, .2)",
+            },
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: "normal",
+                lineHeight: 2,
+              },
+              color: "#fff",
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: "rgba(255, 255, 255, .2)",
+            },
+            ticks: {
+              display: true,
+              color: "#f8f9fa",
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: "normal",
+                lineHeight: 2,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+    new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [
+          {
+            label: "Mobile apps",
+            tension: 0,
+            borderWidth: 0,
+            pointRadius: 5,
+            pointBackgroundColor: "rgba(255, 255, 255, .8)",
+            pointBorderColor: "transparent",
+            borderColor: "rgba(255, 255, 255, .8)",
+            borderColor: "rgba(255, 255, 255, .8)",
+            borderWidth: 4,
+            backgroundColor: "transparent",
+            fill: true,
+            data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+            maxBarThickness: 6,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        interaction: {
+          intersect: false,
+          mode: "index",
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: "rgba(255, 255, 255, .2)",
+            },
+            ticks: {
+              display: true,
+              color: "#f8f9fa",
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: "normal",
+                lineHeight: 2,
+              },
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5],
+            },
+            ticks: {
+              display: true,
+              color: "#f8f9fa",
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: "normal",
+                lineHeight: 2,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+
+    new Chart(ctx3, {
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [
+          {
+            label: "Mobile apps",
+            tension: 0,
+            borderWidth: 0,
+            pointRadius: 5,
+            pointBackgroundColor: "rgba(255, 255, 255, .8)",
+            pointBorderColor: "transparent",
+            borderColor: "rgba(255, 255, 255, .8)",
+            borderWidth: 4,
+            backgroundColor: "transparent",
+            fill: true,
+            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+            maxBarThickness: 6,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        interaction: {
+          intersect: false,
+          mode: "index",
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: "rgba(255, 255, 255, .2)",
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: "#f8f9fa",
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: "normal",
+                lineHeight: 2,
+              },
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5],
+            },
+            ticks: {
+              display: true,
+              color: "#f8f9fa",
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: "normal",
+                lineHeight: 2,
+              },
+            },
+          },
+        },
+      },
+    });
+  </script>
+  <script>
+    var win = navigator.platform.indexOf("Win") > -1;
+    if (win && document.querySelector("#sidenav-scrollbar")) {
+      var options = {
+        damping: "0.5",
+      };
+      Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+</body>

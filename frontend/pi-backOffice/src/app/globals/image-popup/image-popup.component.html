@@ -1,0 +1,32 @@
+<div id="popup" class="popup">
+  <div class="popup-content border rounded p-4" style="max-width: 400px">
+    <span class="close" (click)="closeDialog()">&times;</span>
+    <h2 class="popup-title">{{ "changer la photo" | translate }}</h2>
+    <div class="popup-body text-center">
+      <label for="fileInput" class="mb-3">
+        <img
+          [src]="image"
+          class="rounded-circle mx-auto d-block"
+          alt="Your Image"
+          style="width: 100px; height: 100px; cursor: pointer;"
+        />
+      </label>
+      <input
+        type="file"
+        id="fileInput"
+        accept="image/*"
+        style="display: none;"
+        (change)="handleImageChange($event)"
+      />
+      <p class="popup-text text-center mt-3">
+        {{ "Would you like to change your photo? Choose another one." | translate }}
+      </p>
+    </div>
+    <div class="d-flex justify-content-between mt-4">
+      <button class="btn btn-dark" (click)="closeDialog()">
+        {{ "Annuler" | translate }}
+      </button>
+      <button class="btn btn-primary me-2" (click)="confirmImage()">{{ "Confirmer" | translate }}</button>
+    </div>
+  </div>
+</div>

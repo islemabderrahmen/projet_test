@@ -1,0 +1,279 @@
+<body class="index-page bg-gray-200">
+  <!-- Navbar -->
+  <div class="container position-sticky z-index-sticky top-0">
+    <!-- <div class="row"> -->
+    <!-- <div class="col-12"> -->
+    <nav
+      class="navbar navbar-expand-lg blur border-radius-xl top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-7"
+    >
+      <div class="container-fluid px-0">
+        <a class="navbar-brand font-weight-bolder ms-sm-3" routerLink="/">
+          <img
+            src="../assets/img/esprit.png"
+            style="height: 50px"
+            alt="main_logo"
+          />
+          <span class="ms-1 font-weight-bold text-black">Esprit piazza</span>
+        </a>
+        <button
+          class="navbar-toggler shadow-none ms-2"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navigation"
+          aria-controls="navigation"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon mt-2">
+            <span class="navbar-toggler-bar bar1"></span>
+            <span class="navbar-toggler-bar bar2"></span>
+            <span class="navbar-toggler-bar bar3"></span>
+          </span>
+        </button>
+        <div
+          class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100"
+          id="navigation"
+        >
+          <ul class="navbar-nav navbar-nav-hover ms-auto">
+            <li class="nav-item dropdown dropdown-hover mx-2">
+              <a class="dropdown-item border-radius-md" style="cursor: pointer">
+                <i class="material-icons">language</i>
+              </a>
+              <div
+                class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3"
+                aria-labelledby="dropdownMenuPages"
+              >
+                <div class="d-none d-lg-block">
+                  <h6
+                    class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1"
+                  >
+                    {{ "Langue" | translate }}
+                  </h6>
+                  <li class="nav-item dropdown dropdown-hover mx-2">
+                    <a
+                      class="dropdown-item border-radius-md d-flex align-items-center"
+                      [ngClass]="{ 'text-primary': currentLanguage === 'fr' }"
+                      (click)="changeLanguage('fr')"
+                    >
+                      <img
+                        src="./assets/img/flags/france.png"
+                        class="ms-auto ms-md-2"
+                        style="height: 20px"
+                      />
+                      <span class="ms-2">{{ "Francais" | translate }}</span>
+                    </a>
+                  </li>
+                  <li class="nav-item dropdown dropdown-hover mx-2">
+                    <a
+                      class="dropdown-item border-radius-md d-flex align-items-center"
+                      [ngClass]="{ 'text-primary': currentLanguage === 'en' }"
+                      (click)="changeLanguage('en')"
+                    >
+                      <img
+                        src="./assets/img/flags/uk.png"
+                        class="ms-auto ms-md-2"
+                        style="height: 20px"
+                      />
+                      <span class="ms-2">{{ "Englais" | translate }}</span>
+                    </a>
+                  </li>
+                </div>
+              </div>
+            </li>
+            <li
+              *ngIf="
+                user &&
+                (user.role === 'Admin' ||
+                  user.role === 'FinancialDirection' ||
+                  user.role === 'Community' ||
+                  user.role === 'Professor' ||
+                  user.role === 'Exposant' ||
+                  user.role === 'Fourniseur')
+              "
+              class="nav-item dropdown dropdown-hover mx-2"
+            >
+              <a routerLink="/dashboard" class="dropdown-item border-radius-md">
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown dropdown-hover mx-2">
+              <a
+                [routerLinkActive]="['active', 'text-primary']"
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLink="/moreOffers"
+                class="dropdown-item border-radius-md"
+              >
+                <span>{{ "Offres" | translate }}</span>
+              </a>
+            </li>
+            <li
+              *ngIf="
+                user && (user.role === 'Student' || user.role === 'Alumini')
+              "
+              class="nav-item dropdown dropdown-hover mx-2"
+            >
+              <a
+                [routerLinkActive]="['active', 'text-primary']"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="dropdown-item border-radius-md"
+                routerLink="/listCandidat"
+              >
+                <span>{{ "Candidature" | translate }}</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown dropdown-hover mx-2">
+              <a
+                routerLink="/Allrequests"
+                [routerLinkActive]="['active', 'text-primary']"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="dropdown-item border-radius-md"
+              >
+                <span>{{ "Demandes" | translate }}</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown dropdown-hover mx-2">
+              <a
+                [routerLinkActive]="['active', 'text-primary']"
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLink="/feed"
+                class="dropdown-item border-radius-md"
+              >
+                <span>{{ "Avis" | translate }}</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown dropdown-hover mx-2">
+              <a
+                [routerLinkActive]="['active', 'text-primary']"
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLink="/about"
+                class="dropdown-item border-radius-md"
+              >
+                <span>{{ "About" | translate }}</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown dropdown-hover mx-2">
+              <a
+                [routerLinkActive]="['active', 'text-primary']"
+                [routerLinkActiveOptions]="{ exact: true }"
+                routerLink="/contact"
+                class="dropdown-item border-radius-md"
+              >
+                <span>Contact</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown dropdown-hover mx-2" *ngIf="!login">
+              <a routerLink="/" class="dropdown-item border-radius-md">
+                <span>{{ "Compte" | translate }}</span>
+                <img
+                  src="./assets/img/down-arrow-dark.svg"
+                  alt="down-arrow"
+                  class="arrow ms-auto ms-md-2"
+                />
+              </a>
+              <div
+                class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3"
+                aria-labelledby="dropdownMenuPages"
+              >
+                <div class="d-none d-lg-block">
+                  <h6
+                    class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1"
+                  >
+                    {{ "Authentifier" | translate }}
+                  </h6>
+                  <li class="nav-item dropdown dropdown-hover mx-2">
+                    <a
+                      routerLink="/signIn"
+                      class="dropdown-item border-radius-md d-flex align-items-center"
+                    >
+                      <i class="material-icons" style="font-size: 20px"
+                        >login</i
+                      >
+                      <span class="ms-2">{{ "Se connecter" | translate }}</span>
+                    </a>
+                  </li>
+                  <li class="nav-item dropdown dropdown-hover mx-2">
+                    <a
+                      routerLink="/signUp"
+                      class="dropdown-item border-radius-md d-flex align-items-center"
+                    >
+                      <i class="material-icons" style="font-size: 20px"
+                        >person_add</i
+                      >
+                      <span class="ms-2">{{ "S'inscrire" | translate }}</span>
+                    </a>
+                  </li>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="nav-item dropdown dropdown-hover mx-2" *ngIf="login">
+            <a routerLink="/profile" class="dropdown-item border-radius-md">
+              <img [src]="userImage" class="avatar avatar-sm" alt="user4" />
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3"
+              style="max-width: 100px"
+              aria-labelledby="dropdownMenuPages"
+            >
+              <div class="d-none d-lg-block">
+                <h6
+                  class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1"
+                >
+                  {{ "Mon compte" | translate }}
+                </h6>
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                  <a
+                    [routerLinkActive]="['active', 'text-primary']"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    routerLink="/profile"
+                    class="dropdown-item border-radius-md d-flex align-items-center"
+                  >
+                    <i class="material-icons" style="font-size: 20px">person</i>
+                    <span class="ms-2">{{ "Profile" | translate }}</span>
+                  </a>
+                </li>
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                  <a
+                    [routerLinkActive]="['active', 'text-primary']"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    routerLink="/update-profile"
+                    class="dropdown-item border-radius-md d-flex align-items-center"
+                  >
+                    <i class="material-icons" style="font-size: 20px">edit</i>
+                    <span class="ms-2">{{
+                      "Modifier Profile" | translate
+                    }}</span>
+                  </a>
+                </li>
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                  <a
+                    [routerLinkActive]="['active', 'text-primary']"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    routerLink="/update-password"
+                    class="dropdown-item border-radius-md d-flex align-items-center"
+                  >
+                    <i class="material-icons" style="font-size: 20px">lock</i>
+                    <span class="ms-2">{{
+                      "Modifier mot de passe" | translate
+                    }}</span>
+                  </a>
+                </li>
+                <li class="nav-item dropdown dropdown-hover mx-2">
+                  <a
+                    (click)="logout()"
+                    class="dropdown-item border-radius-md d-flex align-items-center"
+                  >
+                    <i class="material-icons turn" style="font-size: 20px"
+                      >logout</i
+                    >
+                    <span class="ms-2">{{ "Se déconnecter" | translate }}</span>
+                  </a>
+                </li>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</body>

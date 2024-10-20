@@ -1,0 +1,9 @@
+.dropdown-item:hover .arrow {
+  transform: rotate(1deg);
+}
+.dropdown-item .arrow {
+  transition: transform 0.3s ease-in-out;
+}
+.dropdown-item .turn {
+  transform: rotate(180deg);
+}

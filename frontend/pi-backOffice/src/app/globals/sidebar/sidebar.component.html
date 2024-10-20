@@ -1,0 +1,242 @@
+<aside
+  class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+  id="sidenav-main"
+>
+  <div class="sidenav-header">
+    <i
+      class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+      aria-hidden="true"
+      id="iconSidenav"
+    ></i>
+    <a class="navbar-brand m-0" routerLink="/">
+      <img
+        src="../assets/img/esprit.png"
+        class="navbar-brand-img h-100"
+        alt="main_logo"
+      />
+      <span class="ms-1 font-weight-bold text-white">Esprit piazza</span>
+    </a>
+  </div>
+  <hr class="horizontal light mt-0 mb-2" />
+  <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+    <ul class="navbar-nav">
+      <li
+        *ngIf="
+          user &&
+          (user.role === 'Admin' ||
+            user.role === 'FinancialDirection' ||
+            user.role === 'Community' ||
+            user.role === 'Professor' ||
+            user.role === 'Exposant' ||
+            user.role === 'Fourniseur')
+        "
+        class="nav-item"
+      >
+        <a
+          class="nav-link text-white"
+          [routerLinkActive]="['active', 'bg-gradient-primary']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/dashboard"
+        >
+          <div
+            class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+          >
+            <i class="material-icons opacity-10">dashboard</i>
+          </div>
+          <span class="nav-link-text ms-1">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item mt-3">
+        <h6
+          class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8"
+        >
+          Pages
+        </h6>
+      </li>
+      <li
+        *ngIf="user && (user.role === 'Community' || user.role === 'Admin')"
+        class="nav-item"
+      >
+        <a
+          class="nav-link text-white"
+          [routerLinkActive]="['active', 'bg-gradient-primary']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/forumList"
+        >
+          <div
+            class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+          >
+            <i class="material-icons opacity-10">forum</i>
+          </div>
+          <span class="nav-link-text ms-1">{{"Gestion des Forum" | translate }}</span>
+        </a>
+      </li>
+      <li
+        *ngIf="user && (user.role === 'Community' || user.role === 'Admin')"
+        class="nav-item"
+      >
+        <a
+          class="nav-link text-white"
+          [routerLinkActive]="['active', 'bg-gradient-primary']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/packList"
+        >
+          <div
+            class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+          >
+            <i class="material-icons opacity-10">diamond</i>
+          </div>
+          <span class="nav-link-text ms-1">{{"Gestion des Packs" | translate }}</span>
+        </a>
+      </li>
+      <li
+        *ngIf="user && (user.role === 'Community' || user.role === 'Admin')"
+        class="nav-item"
+      >
+        <a
+          class="nav-link text-white"
+          [routerLinkActive]="['active', 'bg-gradient-primary']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/standList"
+        >
+          <div
+            class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+          >
+            <i class="material-icons opacity-10">store</i>
+          </div>
+          <span class="nav-link-text ms-1">{{"Gestion des Stands" | translate }}</span>
+        </a>
+      </li>
+      <li *ngIf="user && user.role === 'Admin'" class="nav-item">
+        <a
+          class="nav-link text-white"
+          [routerLinkActive]="['active', 'bg-gradient-primary']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/reclamation"
+        >
+          <div
+            class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+          >
+            <i class="material-icons opacity-10">report_problem</i>
+          </div>
+          <span class="nav-link-text ms-1">{{"Gestion des Reclamation" | translate }}</span>
+        </a>
+      </li>
+      <li
+        *ngIf="user && (user.role === 'Community' || user.role === 'Admin')"
+        class="nav-item"
+      >
+        <a
+          class="nav-link text-white"
+          [routerLinkActive]="['active', 'bg-gradient-primary']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/offre"
+        >
+          <div
+            class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+          >
+            <i class="material-icons opacity-10">local_offer</i>
+          </div>
+          <span class="nav-link-text ms-1">{{"Gestion des Offres" | translate }}</span>
+        </a>
+      </li>
+      <li
+        *ngIf="user && (user.role === 'Community' || user.role === 'Admin')"
+        class="nav-item"
+      >
+        <a
+          class="nav-link text-white"
+          [routerLinkActive]="['active', 'bg-gradient-primary']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/supplyrequests"
+        >
+          <div
+            class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+          >
+            <i class="material-icons opacity-10">assignment</i>
+          </div>
+          <span class="nav-link-text ms-1">{{"Gestion des Demandes" | translate }}</span>
+        </a>
+      </li>
+      <li
+        *ngIf="user && (user.role === 'Community' || user.role === 'Admin')"
+        class="nav-item"
+      >
+        <a
+          class="nav-link text-white"
+          [routerLinkActive]="['active', 'bg-gradient-primary']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/invoices"
+        >
+          <div
+            class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+          >
+            <i class="material-icons opacity-10">receipt</i>
+          </div>
+          <span class="nav-link-text ms-1">{{"Gestion des Factures" | translate }}</span>
+        </a>
+      </li>
+      <li *ngIf="user && user.role === 'Fourniseur'" class="nav-item">
+        <a
+          class="nav-link text-white"
+          [routerLinkActive]="['active', 'bg-gradient-primary']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/my-invoices"
+        >
+          <div
+            class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+          >
+            <i class="material-icons opacity-10">receipt</i>
+          </div>
+          <span class="nav-link-text ms-1">{{"Mes Factures" | translate }}</span>
+        </a>
+      </li>
+      <li *ngIf="user && user.role === 'Fourniseur'" class="nav-item">
+        <a
+          class="nav-link text-white"
+          [routerLinkActive]="['active', 'bg-gradient-primary']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/devis"
+        >
+          <div
+            class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+          >
+            <i class="material-icons opacity-10">description</i>
+          </div>
+          <span class="nav-link-text ms-1">{{"Mes Devis" | translate }}</span>
+        </a>
+      </li>
+
+      <li *ngIf="user && user.role === 'Exposant'" class="nav-item">
+        <a
+          class="nav-link text-white"
+          [routerLinkActive]="['active', 'bg-gradient-primary']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/offerBySociety"
+        >
+          <div
+            class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+          >
+            <i class="material-icons opacity-10">local_offer</i>
+          </div>
+          <span class="nav-link-text ms-1">{{"Offres par société" | translate }}</span>
+        </a>
+      </li>
+      <li *ngIf="user && user.role === 'Admin'" class="nav-item">
+        <a
+          class="nav-link text-white"
+          [routerLinkActive]="['active', 'bg-gradient-primary']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/individuals"
+        >
+          <div
+            class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+          >
+            <i class="material-icons opacity-10">group</i>
+          </div>
+          <span class="nav-link-text ms-1">{{"Gestion des utilisateurs" | translate }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>

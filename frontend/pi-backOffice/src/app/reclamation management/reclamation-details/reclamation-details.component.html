@@ -1,0 +1,70 @@
+<body class="g-sidenav-show bg-gray-200">
+  <div class="row">
+    <div class="col-3">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-9">
+      <app-navbar [currentScreen]="'détails de l\'utilisateur'"></app-navbar>
+      <div class="main-content">
+        <div class="container-fluid px-2 px-md-4">
+          <div
+            class="page-header min-height-300 border-radius-xl mt-4"
+            style="background-image: url('../assets/imgB/fe.png')"
+          >
+            <span class="mask bg-gradient-primary opacity-6"></span>
+          </div>
+          <div class="card card-body mx-3 mx-md-4 mt-n6">
+            <div class="row gx-4 mb-2">
+              <div class="col-auto">
+                <div class="avatar avatar-xl position-relative">
+                  <img
+                    [src]="userImage"
+                    alt="profile_image"
+                    class="w-100 border-radius-lg shadow-sm"
+                  />
+                </div>
+              </div>
+              <div class="col-auto my-auto">
+                <div class="h-100">
+                  <h5 class="mb-1">{{ reclamation?.user?.username }}</h5>
+                  <p class="mb-0 font-weight-normal text-sm">
+                    {{ reclamation?.user?.firstName }}
+                    {{ reclamation?.user?.lastName }}
+                  </p>
+                </div>
+              </div>
+              <div
+                class="col-lg-6 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3"
+              ></div>
+            </div>
+            <div class="row">
+              <div class="row">
+                <div class="col-12 col-xl-4">
+                  <div class="card card-plain h-100">
+                    <div class="card-body p-3">
+                      <ul class="list-group">
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                          <strong class="text-dark">Date :</strong>
+                          {{ reclamation?.dateTime }}
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                          <strong class="text-dark">Type :</strong>
+                          {{ reclamation?.typeReclamation }}
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                          <strong class="text-dark">Description :</strong>
+                          {{ reclamation?.description }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer-index></app-footer-index>
+</body>

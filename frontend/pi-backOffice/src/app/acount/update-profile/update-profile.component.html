@@ -1,0 +1,176 @@
+<body class="g-sidenav-show bg-gray-200">
+  <div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+      <div class="col-12">
+        <app-navbar-index></app-navbar-index>
+      </div>
+    </div>
+  </div>
+  <br /><br /><br /><br />
+  <div class="main-content">
+    <div class="container-fluid px-2 px-md-9">
+      <div
+        class="page-header min-height-300 border-radius-xl mt-4 position-relative"
+        style=" background-image: url('../assets/imgB/fe.png');"
+      >
+        <span class="mask bg-gradient-primary opacity-6"></span>
+        <h1
+          class="text-white animated-text position-absolute top-50 start-50 translate-middle"
+        >
+          {{ "Modifier profile" | translate }}
+        </h1>
+      </div>
+      <div class="card card-body mx-3 mx-md-8 mt-n6">
+        <div class="row">
+          <div class="col-lg-11 mx-auto">
+            <form
+              role="form"
+              [formGroup]="updateProfile"
+              (ngSubmit)="update(updateProfile.value)"
+            >
+              <div
+                *ngIf="
+                  updateProfile.get('role')!.value &&
+                  individuRole.includes(updateProfile.get('role')!.value)
+                "
+              >
+                <div class="input-group input-group-outline row mb-3">
+                  <label for="firstName" class="col-sm-4 col-form-label"
+                    >{{ "First name :" | translate }}</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="firstName"
+                    placeholder="{{ 'First name' | translate }}"
+                    id="firstName"
+                  />
+                </div>
+
+                <div class="input-group input-group-outline row mb-3">
+                  <label for="lastName" class="col-sm-4 col-form-label"
+                    >{{ "Last name :" | translate }}</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="lastName"
+                    placeholder="{{ 'Last name' | translate }}"
+                    id="lastName"
+                  />
+                </div>
+                <div class="input-group input-group-outline row mb-3">
+                  <label for="description" class="col-sm-4 col-form-label"
+                    >{{ "Plus dinforamtions :" | translate }}</label
+                  >
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    formControlName="description"
+                    placeholder="{{ 'Plus dinformations' | translate }}"
+                    rows="4"
+                    id="description"
+                  ></textarea>
+                </div>
+                <h5>
+                  {{ "Vous pouvez ajouter vos réseaux sociaux personnels si vous le désirez." | translate }}
+                </h5>
+                <div class="input-group input-group-outline row mb-3">
+                  <label for="portfolio" class="col-sm-4 col-form-label"
+                    >{{ "Portfolio :" | translate }}</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="portfolio"
+                    placeholder="{{ 'Portfolio' | translate }}"
+                    id="portfolio"
+                  />
+                </div>
+                <div class="input-group input-group-outline row mb-3">
+                  <label for="linkedin" class="col-sm-4 col-form-label"
+                    >{{ "Linkedin :" | translate }}</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="linkedin"
+                    placeholder="{{ 'Linkedin' | translate }}"
+                    id="linkedin"
+                  />
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  updateProfile.get('role')!.value &&
+                  societyRole.includes(updateProfile.get('role')!.value)
+                "
+              >
+                <div class="input-group input-group-outline row mb-3">
+                  <label for="matricule" class="col-sm-4 col-form-label"
+                    >{{ "Matricule :" | translate }}</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="matricule"
+                    placeholder="{{ 'Matricule' | translate }}"
+                    id="matricule"
+                  />
+                </div>
+                <div class="input-group input-group-outline row mb-3">
+                  <label for="adresse" class="col-sm-4 col-form-label"
+                    >{{ "Adresse :" | translate }}</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="adresse"
+                    placeholder="{{ 'Adresse' | translate }}"
+                    id="adresse"
+                  />
+                </div>
+
+                <div class="input-group input-group-outline row mb-3">
+                  <label for="representative" class="col-sm-4 col-form-label"
+                    >{{ "Representative :" | translate }}</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="representative"
+                    placeholder="{{ 'Representative' | translate }}"
+                    id="representative"
+                  />
+                </div>
+
+                <div class="input-group input-group-outline row mb-3">
+                  <label for="sector" class="col-sm-4 col-form-label"
+                    >{{ "Sector :" | translate }}</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="sector"
+                    placeholder="{{ 'Sector' | translate }}"
+                    id="sector"
+                  />
+                </div>
+              </div>
+              <div class="text-center col-md-3 mx-auto">
+                <button
+                  type="submit"
+                  class="btn bg-gradient-primary w-100 my-4 mb-2"
+                  [disabled]="isLoading || updateProfile.invalid"
+                >
+                  {{ isLoading ? "Loading..." : "Mettre à jour" | translate }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-footer-index></app-footer-index>
+  </div>
+</body>

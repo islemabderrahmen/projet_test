@@ -1,0 +1,217 @@
+<body class="index-page bg-gray-200">
+  <div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+      <div class="col-12">
+        <app-navbar-index></app-navbar-index>
+      </div>
+    </div>
+  </div>
+  <app-header></app-header>
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+    <div class="container">
+      <div class="row">
+        <div
+          class="col-lg-4 col-md-8"
+          *ngFor="
+            let reclamation of reclamations.slice(startIndex, endIndex + 1);
+            let i = index
+          "
+        >
+          <div
+            class="card fixed-card-size mt-4"
+            [ngClass]="{
+              'bg-gradient-primary': i % 2 !== 0,
+              'card-plain b': i % 2 === 0
+            }"
+          >
+            <div class="card-body">
+              <div class="author">
+                <div class="name">
+                  <h6
+                    class="mb-0 font-weight-bolder"
+                    [ngClass]="{ 'text-white': i % 2 !== 0 }"
+                  >
+                    {{ reclamation.user.username }}
+                  </h6>
+                  <div class="stats" [ngClass]="{ 'text-white': i % 2 !== 0 }">
+                    <i class="far fa-clock"></i> {{ reclamation.dateTime }}
+                  </div>
+                </div>
+              </div>
+
+              <p class="mt-4" [ngClass]="{ 'text-white': i % 2 !== 0 }">
+                "{{ reclamation.description }}"
+              </p>
+              <i
+                class="fas fa-heart favorite-icon position-absolute top-5 end-0 m-2"
+                [ngClass]="{ 'heart-white': i % 2 !== 0 }"
+                (click)="addFavorite(reclamation)"
+              ></i>
+              <app-rating
+                [reclamationId]="reclamation.id"
+                [ngClass]="{ 'text-white': i % 2 !== 0 }"
+              ></app-rating>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pagination">
+        <button
+          class="btn btn-link"
+          (click)="prevPage()"
+          [disabled]="currentPage === 1"
+          style="color: black"
+        >
+          <i class="fas fa-chevron-left"></i> {{ "Previous" | translate }}
+        </button>
+        <span>{{ currentPage }} / {{ totalPages() }}</span>
+        <button
+          class="btn btn-link"
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages()"
+          style="color: black"
+        >
+          {{"Next" | translate }} <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="button-container">
+        <button routerLink="favorite" class="btn bg-gradient-dark">
+          {{"Favorites" | translate }}
+        </button>
+      </div>
+    </div>
+    <section>
+      <div class="container py-4">
+        <div class="row">
+          <div
+            class="col-lg-7 mx-auto d-flex justify-content-center flex-column"
+          >
+            <h3 class="text-center">{{"Feed-Back Form" | translate }}</h3>
+            <form
+              [formGroup]="form"
+              (ngSubmit)="create(form.value)"
+              role="form"
+              id="contact-form"
+              method="post"
+              autocomplete="off"
+            >
+              <div class="card-body">
+                <div class="input-group mb-4 input-group-static">
+                  <label>{{"Your message" | translate }}</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="description"
+                    placeholder="{{'Describe your opinion...' | translate }}"
+                  />
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div
+                      class="form-check form-switch mb-4 d-flex align-items-center"
+                    >
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="flexSwitchCheckDefault"
+                        checked=""
+                        formControlName="termsAndConditions"
+                      />
+                      <label
+                        class="form-check-label ms-3 mb-0"
+                        for="flexSwitchCheckDefault"
+                        >{{"I agree to the" | translate }}
+                        <a href="javascript:;" class="text-dark"
+                          ><u>{{"Terms and Conditions" | translate }}</u></a
+                        >.</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <button
+                      type="submit"
+                      class="btn bg-gradient-dark w-100"
+                      [disabled]="form.invalid"
+                    >
+                      {{"Send Message" | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <app-footer-index></app-footer-index>
+  <script
+    src="../assets/jsB/core/popper.min.js"
+    type="text/javascript"
+  ></script>
+  <script
+    src="../assets/jsB/core/bootstrap.min.js"
+    type="text/javascript"
+  ></script>
+  <script src="../assets/jsB/plugins/perfect-scrollbar.min.js"></script>
+
+  <!--  Plugin for TypedJS, full documentation here: https://github.com/inorganik/CountUp.js -->
+  <script src="../assets/jsB/plugins/countup.min.js"></script>
+
+  <script src="../assets/jsB/plugins/choices.min.js"></script>
+
+  <script src="../assets/jsB/plugins/prism.min.js"></script>
+  <script src="../assets/jsB/plugins/highlight.min.js"></script>
+
+  <!--  Plugin for Parallax, full documentation here: https://github.com/dixonandmoe/rellax -->
+  <script src="../assets/jsB/plugins/rellax.min.js"></script>
+  <!--  Plugin for TiltJS, full documentation here: https://gijsroge.github.io/tilt.js/ -->
+  <script src="../assets/jsB/plugins/tilt.min.js"></script>
+  <!--  Plugin for Selectpicker - ChoicesJS, full documentation here: https://github.com/jshjohnson/Choices -->
+  <script src="../assets/jsB/plugins/choices.min.js"></script>
+
+  <!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
+  <!--  Google Maps Plugin    -->
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+  <script
+    src="../assets/jsB/material-kit.min.js?v=3.0.4"
+    type="text/javascript"
+  ></script>
+
+  <script type="text/javascript">
+    if (document.getElementById("state1")) {
+      const countUp = new CountUp(
+        "state1",
+        document.getElementById("state1").getAttribute("countTo")
+      );
+      if (!countUp.error) {
+        countUp.start();
+      } else {
+        console.error(countUp.error);
+      }
+    }
+    if (document.getElementById("state2")) {
+      const countUp1 = new CountUp(
+        "state2",
+        document.getElementById("state2").getAttribute("countTo")
+      );
+      if (!countUp1.error) {
+        countUp1.start();
+      } else {
+        console.error(countUp1.error);
+      }
+    }
+    if (document.getElementById("state3")) {
+      const countUp2 = new CountUp(
+        "state3",
+        document.getElementById("state3").getAttribute("countTo")
+      );
+      if (!countUp2.error) {
+        countUp2.start();
+      } else {
+        console.error(countUp2.error);
+      }
+    }
+  </script>
+</body>

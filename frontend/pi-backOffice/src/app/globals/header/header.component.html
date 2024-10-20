@@ -1,0 +1,58 @@
+<style>
+  /* Define animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to {
+      opacity: 2;
+      transform: translateY(0);
+    }
+  }
+
+  /* Apply animation to elements */
+  .animated-text {
+    animation: fadeInUp 1s ease forwards; /* Apply fadeInUp animation to the text */
+  }
+</style>
+<body>
+  <header class="bg-gradient-dark">
+    <div
+      class="page-header min-vh-90"
+      style="background-image: url('./assets/imgB/home.jpeg')"
+    >
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1
+              class="text-white pt-3 mt-n5 animated-text"
+              style="
+                font-family: 'Pacifico', cursive;
+                font-size: 3.5rem;
+                letter-spacing: 2px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+              "
+            >
+              {{ "Bienvenue chez notre" | translate }}
+            </h1>
+            <h2
+              class="text-white mt-3 animated-text"
+              style="
+                font-family: 'Open Sans', sans-serif;
+                font-size: 2.5rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                color: #f8f9fa;
+              "
+            >
+              {{ "Forum des entreprise ESPRIT 2024 " | translate }}<br />
+              {{ countdownText | translate }}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</body>

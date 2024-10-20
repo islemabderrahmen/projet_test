@@ -1,0 +1,91 @@
+<body class="contact-us bg-gray-200">
+  <div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+      <div class="col-12">
+        <app-navbar-index></app-navbar-index>
+      </div>
+    </div>
+  </div>
+  <app-header></app-header>
+  <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
+    <section>
+      <div class="page-header min-vh-100">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-5 col-lg-6 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-8">
+              <div class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
+                style="
+                     background-image: url('../../../assets/imgB/g.jpg');
+                     background-size: cover;
+                   " loading="lazy"></div>
+            </div>
+            <div class="col-xl-5 col-lg-6 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+              <div class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                  <div class="bg-gradient-primary shadow-primary border-radius-lg p-3">
+                    <h3 class="text-white text-primary mb-0">Personalisez votre pack</h3>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p class="pb-3">
+                    Pour d’autres questions, y compris des opportunités de
+                    partenariat, des stages, veuillez envoyer un e-mail à
+                    espritpiazza@zohomail.com ou nous contacter en utilisant
+                    notre formulaire de contact.
+                  </p>
+                  <form [formGroup]="packForm" (ngSubmit)="onSubmit()">
+                    <div class="input-group input-group-outline row mb-3">
+                      <label for="numberOfOffers" class="col-md-4 col-form-label">Nombre d'offres :</label>
+                      <input type="number" class="form-control" formControlName="numberOfOffers" id="numberOfOffers"
+                        style="background-color: white;">
+
+                    </div>
+                    <div class="input-group input-group-outline row mb-3">
+                      <label for="numberOfBadges" class="col-md-4 col-form-label">Nombre de badge :</label>
+                      <input type="number" class="form-control" formControlName="numberOfBadges" id="numberOfBadges"
+                        style="background-color: white;">
+
+                    </div>
+                    <div class="input-group input-group-outline row mb-3">
+                      <label for="numberOfFlyers" class="col-md-4 col-form-label">Nombre de flyers :</label>
+                      <input type="number" class="form-control" formControlName="numberOfFlyers" id="numberOfFlyers"
+                        style="background-color: white;">
+
+                    </div>
+                    <div class="input-group input-group-outline row mb-3">
+                      <label for="numberOfFlyers" class="col-md-4 col-form-label">Numéro du stand :</label>
+
+                      <select class="form-select" formControlName="stand">
+                        <option *ngFor="let s of stands" [value]="s.number">{{ s.number }}</option>
+                      </select>
+                    </div>
+                    <div class="mb-3 form-check">
+                      <label class="col-md-4 col-form-label" for="displayLogo">
+                        Afficher le logo :
+                      </label>
+                      <input class="form-check-input" type="checkbox" value="" id="displayLogo">
+
+
+                    </div>
+
+
+                    <div class="mb-3 form-check">
+                      <label class="col-md-4 col-form-label" for="insertFlyer">
+                        Insérer un flyer :
+                      </label>
+                      <input class="form-check-input" type="checkbox" value="" id="insertFlyer">
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn bg-gradient-primary mt-3 mb-0">Enregistrer</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <app-footer-index></app-footer-index>
+</body>
